@@ -41,7 +41,7 @@ public class UtenteDTO {
 	@NotNull(message = "{dataCreazione.notnull}")
 	private Date dataCreazione;
 
-	@NotBlank(message = "{codiceFiscali.notblank}")
+	@NotBlank(message = "{codiceFiscale.notblank}")
 	private String codiceFiscale;
 
 	@NotNull(message = "{stato.notnull}")

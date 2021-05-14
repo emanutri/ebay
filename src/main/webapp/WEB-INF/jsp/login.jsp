@@ -61,7 +61,7 @@
 		    </label>
 		  </div>
 		  <button class="btn btn-lg btn-primary btn-block" type="submit">Accedi</button>
-			  <a href = "${pageContext.request.contextPath}/registration" class = "btn btn-lg btn-secondary btn-block" >Registrati</a>
+			  <a href = "${pageContext.request.contextPath}/registration/register" class = "btn btn-lg btn-secondary btn-block" >Registrati</a>
 		  <p class="mt-5 mb-3 text-muted">&copy; 2017-2021</p>
 		</form>
 	</body>
