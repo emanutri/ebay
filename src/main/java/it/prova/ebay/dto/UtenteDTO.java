@@ -350,7 +350,7 @@ public class UtenteDTO {
 	}
 
 	public boolean isDisabilitato() {
-		return this.stato.equals(StatoUtente.ELIMINATO);
+		return this.stato.equals(StatoUtente.DISABILITATO);
 	}
 
 }

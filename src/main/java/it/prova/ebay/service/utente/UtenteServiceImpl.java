@@ -59,8 +59,8 @@ public class UtenteServiceImpl implements UtenteService {
 			throw new RuntimeException("Elemento non trovato.");
 		}
 		if (utenteInstance.getStato().equals(StatoUtente.ATTIVO)) {
-			utenteInstance.setStato(StatoUtente.ELIMINATO);
-		} else if (utenteInstance.getStato().equals(StatoUtente.ELIMINATO)) {
+			utenteInstance.setStato(StatoUtente.DISABILITATO);
+		} else if (utenteInstance.getStato().equals(StatoUtente.DISABILITATO)) {
 			utenteInstance.setStato(StatoUtente.ATTIVO);
 		}
 	}

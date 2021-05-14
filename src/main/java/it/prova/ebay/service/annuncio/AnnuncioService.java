@@ -6,7 +6,7 @@ import it.prova.ebay.model.Annuncio;
 
 public interface AnnuncioService {
 	
-	public List<Annuncio> listAllUtenti();
+	public List<Annuncio> listAllAnnunci();
 
 	public Annuncio caricaSingoloUtente(Long id);
 

@@ -43,7 +43,7 @@ public class Annuncio {
 	@NotNull(message = "{dataPubblicazione.notnull}")
 	@Column(name = "data_pubblicazione")
 	private Date dataPubblicazione;
-
+	
 	@NotNull(message = "{utente.notnull}")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "utente_id")

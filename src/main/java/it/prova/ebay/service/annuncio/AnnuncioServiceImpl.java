@@ -16,7 +16,7 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 	private AnnuncioRepository repository;
 
 	@Transactional(readOnly = true)
-	public List<Annuncio> listAllUtenti() {
+	public List<Annuncio> listAllAnnunci() {
 		return (List<Annuncio>) repository.findAll();
 	}
 
