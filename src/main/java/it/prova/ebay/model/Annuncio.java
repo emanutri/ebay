@@ -43,7 +43,7 @@ public class Annuncio {
 	@NotNull(message = "{dataPubblicazione.notnull}")
 	@Column(name = "data_pubblicazione")
 	private Date dataPubblicazione;
-	
+
 	@NotNull(message = "{utente.notnull}")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "utente_id")
@@ -73,6 +73,15 @@ public class Annuncio {
 		this.dataPubblicazione = dataPubblicazione;
 		this.utente = utente;
 		this.categorie = categorie;
+	}
+
+	public Annuncio(Long id, Boolean aperto, String testoAnnuncio, Double prezzo, Date dataPubblicazione, Utente utente) {
+		this.id = id;
+		this.aperto = aperto;
+		this.testoAnnuncio = testoAnnuncio;
+		this.prezzo = prezzo;
+		this.dataPubblicazione = dataPubblicazione;
+		this.utente = utente;
 	}
 
 	public Long getId() {
