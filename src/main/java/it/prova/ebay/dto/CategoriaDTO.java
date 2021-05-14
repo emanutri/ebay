@@ -1,9 +1,13 @@
 package it.prova.ebay.dto;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
+
+import it.prova.ebay.model.Categoria;
 
 public class CategoriaDTO {
 
@@ -76,5 +80,33 @@ public class CategoriaDTO {
 		this.descrizione = descrizione;
 		this.codice = codice;
 	}
+	
+	public Categoria buildCategoriaModel() {
+		return new Categoria(this.descrizione, this.codice);
+	}
+
+	public static CategoriaDTO createCategoriaDTOInstanceFromParams(String descrizione, String codice) {
+
+		CategoriaDTO result = new CategoriaDTO(descrizione, codice);
+		return result;
+	}
+
+	public static Categoria createModelFromDTO(CategoriaDTO categoriaInstance) {
+		return new Categoria(categoriaInstance.descrizione, categoriaInstance.codice);
+	}
+
+	public static CategoriaDTO createDTOFromModel(Categoria categoriaInstance) {
+		return new CategoriaDTO(categoriaInstance.getDescrizione(), categoriaInstance.getCodice());
+	}
+
+	public static List<Categoria> createCategoriaModelListFromDTOList(List<CategoriaDTO> dtoListInput) {
+		return dtoListInput.stream().map(utenteEntity -> createModelFromDTO(utenteEntity)).collect(Collectors.toList());
+	}
+
+	public static List<CategoriaDTO> createCategoriaDTOListFromModelList(List<Categoria> modelListInput) {
+		return modelListInput.stream().map(utenteEntity -> createDTOFromModel(utenteEntity))
+				.collect(Collectors.toList());
+	}
+
 
 }

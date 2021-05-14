@@ -288,20 +288,6 @@ public class UtenteDTO {
 		this.stato = stato;
 	}
 
-//	public Utente buildUtenteModel() {
-//
-//		if (this.ruoli == null || this.ruoli.isEmpty()) {
-//			return buildUtenteModelNoRoles();
-//		}
-//
-//		return buildUtenteModelWithRoles();
-//	}
-
-//	public Utente buildUtenteModelNoRoles() {
-//		return new Utente(this.nome, this.cognome, this.username, this.password, this.dataNascita, this.dataCreazione,
-//				this.codiceFiscale, this.credito, this.stato);
-//	}
-
 	public Utente buildUtenteModel() {
 		return new Utente(this.nome, this.cognome, this.username, this.password, this.dataNascita, this.dataCreazione,
 				this.codiceFiscale, this.credito, this.stato, RuoloDTO.createRuoloModelListFromDTOList(this.ruoli));

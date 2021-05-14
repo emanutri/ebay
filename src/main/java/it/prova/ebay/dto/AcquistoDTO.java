@@ -1,10 +1,13 @@
 package it.prova.ebay.dto;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import it.prova.ebay.model.Acquisto;
 import it.prova.ebay.model.Utente;
 
 public class AcquistoDTO {
@@ -93,7 +96,34 @@ public class AcquistoDTO {
 	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
+	
+	public Acquisto buildAcquistoModel() {
+		return new Acquisto(this.descrizione, this.anno ,this.prezzo);
+	}
 
-	// TO-DO createDTOfrom
+	public static AcquistoDTO createAcquistoDTOInstanceFromParams(String descrizione, Date anno, Double prezzo) {
+
+		AcquistoDTO result = new AcquistoDTO(descrizione,prezzo,anno);
+
+		return result;
+	}
+
+	public static Acquisto createModelFromDTO(AcquistoDTO acquistoInstance) {
+		return new Acquisto(acquistoInstance.getDescrizione(), acquistoInstance.getAnno(), acquistoInstance.getPrezzo());
+	}
+
+	public static AcquistoDTO createDTOFromModel(Acquisto acquistoInstance) {
+		return new AcquistoDTO(acquistoInstance.getDescrizione(), acquistoInstance.getPrezzo(), acquistoInstance.getAnno());
+	}
+
+	public static List<Acquisto> createAcquistoModelListFromDTOList(List<AcquistoDTO> dtoListInput) {
+		return dtoListInput.stream().map(utenteEntity -> createModelFromDTO(utenteEntity)).collect(Collectors.toList());
+	}
+
+	public static List<AcquistoDTO> createAcquistoDTOListFromModelList(List<Acquisto> modelListInput) {
+		return modelListInput.stream().map(utenteEntity -> createDTOFromModel(utenteEntity))
+				.collect(Collectors.toList());
+	}
+
 
 }
