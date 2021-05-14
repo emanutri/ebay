@@ -33,7 +33,6 @@ public class UtenteController {
 	@Autowired
 	private AnnuncioService annuncioService;
 	
-	
 	@GetMapping
 	public ModelAndView listAllUtenti() {
 		ModelAndView mv = new ModelAndView();

@@ -1,5 +1,7 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,13 +14,15 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.80.0">
     <title>Registrazione</title>
-    
 
     <!-- Favicons -->
     <meta name="theme-color" content="#563d7c">
 
-
     <style>
+    
+    	.error_field {
+	        color: red; 
+	    }
         
     body {
     	background-color: #ffffff !important; 
@@ -37,6 +41,7 @@
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
         }
+        
       }
       
     </style>
@@ -44,20 +49,22 @@
 
   </head>
   <body>
+  
   	<jsp:include page="../navbar.jsp" />
+	
 	<div role = "main" class="container">
 	  <div class="py-5 text-center">
 	    <h2>Registrazione</h2>
-	    <p class="lead">Benvenuto/a nel form di registrazione. Compilare tutti i campi per ottenere un account. Questo verra' in seguito validato da un amministratorie di sistema.</p>
+	    <p class="lead">Benvenuto/a nel form di registrazione. Compilare tutti i campi per ottenere un account.</p>
 	  </div>
 	  
-	  	<div class="alert alert-danger ${registration_utente_attr.hasErrors()?'':'d-none'}" role="alert">
-			<c:forEach var ="errorItem" items="${registration_utente_attr.errors }">
-	        	<ul>
-					<li> ${errorItem }</li>	
-				</ul>
-	      	</c:forEach>
-		</div>
+		<spring:hasBindErrors  name="registra_utente_attr">
+			<%-- alert errori --%>
+			<div class="alert alert-danger " role="alert">
+				Attenzione!! Sono presenti errori di validazione
+			</div>
+		</spring:hasBindErrors>
+		
 		<div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}" role="alert">
 		  ${errorMessage}
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -65,78 +72,90 @@
 		  </button>
 		</div>
 	  
+	  <h6 class="card-title">I campi con <span class="text-danger">*</span> sono obbligatori</h6>
+	  
 	  <div class="row">
 	    <div class="col-md-12 order-md-1">
 	      <h4 class="mb-3">Registrazione utente</h4>
-	      <form novalidate action="ExecuteRegistrationUtenteServlet" method="post">
+	      
+	      <form:form action="save" method="post" modelAttribute="registra_utente_attr" novalidate="novalidate">
+	      
 	        <div class="row">
-	          <div class="col-md-6 mb-3">
-	            <label for="nome">Nome</label>
-	            <input type="text" class="form-control" name = "nome" id="nome" placeholder="Nome" value="${registration_utente_attr.nome }" required>
-	          </div>
-	          <div class="col-md-6 mb-3">
-	            <label for="cognome">Cognome</label>
-	            <input type="text" class="form-control" name = "cognome" id="cognome" placeholder="Cognome" value="${registration_utente_attr.cognome }" required>
-	          </div>
+		        <div class="col-md-6 mb-3">
+					<label>Nome <span class="text-danger">*</span></label>
+					<spring:bind path="nome">
+						<input type="text" name="nome" id="nome" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il nome" value="${registra_utente_attr.nome }" required>
+					</spring:bind>
+					<form:errors  path="nome" cssClass="error_field" />
+				</div>
+				
+				<div class="col-md-6 mb-3">
+				<label>Cognome <span class="text-danger">*</span></label>
+					<spring:bind path="cognome">
+						<input type="text" name="cognome" id="cognome" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il cognome" value="${registra_utente_attr.cognome }" required>
+					</spring:bind>
+					<form:errors  path="cognome" cssClass="error_field" />
+				</div>
+			</div>
+		    <div class="row">
+				<div class="form-group col-md-12">
+					<label>Username <span class="text-danger">*</span></label>
+					<spring:bind path="username">
+						<input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" autocomplete="nope" name="username" id="username" placeholder="Inserire username" value="${insert_utente_attr.username }" required>
+					</spring:bind>
+					<form:errors path="username" cssClass="error_field" /> 
+				</div>
+			</div>
+	       <div class="row">
+		        <div class="col-md-6 mb-3">
+					<label>Password <span class="text-danger">*</span></label>
+							<spring:bind path="password">
+								<input type="password" class="form-control ${status.error ? 'is-invalid' : ''}" autocomplete="new-password" name="password" id="password" placeholder="Inserire password" value="${registra_utente_attr.password }" required>
+							</spring:bind>
+							<form:errors path="password" cssClass="error_field" />
+				</div>
+				        
+		        <div class="col-md-6 mb-3">
+					<label>Conferma Password <span class="text-danger">*</span></label>
+							<spring:bind path="confermaPassword">
+								<input type="password" class="form-control ${status.error ? 'is-invalid' : ''}" autocomplete="new-password" name="confermaPassword" id="confermaPassword" placeholder="Inserire conferma password" value="${registra_utente_attr.password }" required>
+							</spring:bind>
+							<form:errors path="confermaPassword" cssClass="error_field" />
+				</div>
+				
 	        </div>
-	
-	        <div class="mb-3">
-	          <label for="username">Username</label>
-	          <div class="input-group">
-	            <input type="text" class="form-control" name = "username" id="username" placeholder="Username" value = "${registration_utente_attr.username }" autocomplete = "nope" required>
-	          </div>
+	       
+	       <div class="row">
+				
+				<div class="form-group col-md-6">
+					<label>Data di Nascita <span class="text-danger">*</span></label>
+	                    		<spring:bind path="dataNascita">
+	                     		<input class="form-control ${status.error ? 'is-invalid' : ''}" id="dataNascita" type="date" placeholder="dd/MM/yy"
+	                         		title="formato : gg/mm/aaaa"  name="dataNascita" required 
+	                         		value="${parsedDate}" >
+	                         </spring:bind>
+	                        	<form:errors  path="dataNascita" cssClass="error_field" />
+				</div>
+		
+				<div class="form-group col-md-6">
+					<label>Codice Fiscale <span class="text-danger">*</span></label>
+					<spring:bind path="codiceFiscale">
+						<input type="text" name="codiceFiscale" id="codiceFiscale" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il codice fiscale" value="${registra_utente_attr.codiceFiscale }" required>
+					</spring:bind>
+					<form:errors  path="codiceFiscale" cssClass="error_field" />
+				</div>
+		        
 	        </div>
-	
-	        <div class="mb-3">
-	          <label for="password">Password</label>
-	          <input type="password" class="form-control" name = "password" id="password" placeholder="Password" value = "${registration_utente_attr.password }" autocomplete = "new-password" required>
-	        </div>
-	
-	        <div class="mb-3">
-	          <label for="confermaPassword">Conferma Password</label>
-	          <input type="password" class="form-control" name = "confermaPassword" id="confermaPassword" placeholder="Conferma Password" value = "${registration_utente_attr.confermaPassword }" autocomplete = "new-password" required>
-	        </div>
-	
-<!-- 	        <div class="mb-3"> -->
-<!-- 	          <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label> -->
-<!-- 	          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite"> -->
-<!-- 	        </div> -->
-	
-<!-- 	        <div class="row"> -->
-<!-- 	          <div class="col-md-5 mb-3"> -->
-<!-- 	            <label for="country">Country</label> -->
-<!-- 	            <select class="custom-select d-block w-100" id="country" required> -->
-<!-- 	              <option value="">Choose...</option> -->
-<!-- 	              <option>United States</option> -->
-<!-- 	            </select> -->
-<!-- 	            <div class="invalid-feedback"> -->
-<!-- 	              Please select a valid country. -->
-<!-- 	            </div> -->
-<!-- 	          </div> -->
-<!-- 	          <div class="col-md-4 mb-3"> -->
-<!-- 	            <label for="state">State</label> -->
-<!-- 	            <select class="custom-select d-block w-100" id="state" required> -->
-<!-- 	              <option value="">Choose...</option> -->
-<!-- 	              <option>California</option> -->
-<!-- 	            </select> -->
-<!-- 	            <div class="invalid-feedback"> -->
-<!-- 	              Please provide a valid state. -->
-<!-- 	            </div> -->
-<!-- 	          </div> -->
-<!-- 	          <div class="col-md-3 mb-3"> -->
-<!-- 	            <label for="zip">Zip</label> -->
-<!-- 	            <input type="text" class="form-control" id="zip" placeholder="" required> -->
-<!-- 	            <div class="invalid-feedback"> -->
-<!-- 	              Zip code required. -->
-<!-- 	            </div> -->
-<!-- 	          </div> -->
-<!-- 	        </div> -->
-	        
+	        <br>
+	        <br>
+	              
 	        <button class="btn btn-primary btn-lg btn-block" type="submit">Registrati</button>
-        	<a href="${pageContext.request.contextPath}/HomeServlet" class='btn btn-outline-secondary btn-lg btn-block' >
+        	<a href="${pageContext.request.contextPath}/home" class='btn btn-outline-secondary btn-lg btn-block' >
 	            <i class='fa fa-chevron-left'></i> Back
 	        </a>
-	      </form>
+	        
+	      </form:form>
+	    
 	    </div>
 	  </div>
 	
