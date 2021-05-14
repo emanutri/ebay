@@ -1,0 +1,102 @@
+package it.prova.ebay.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "acquisto")
+public class Acquisto {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+
+	@NotBlank(message = "{descrizione.notblank}")
+	@Column(name = "descrizione")
+	private String descrizione;
+
+	@NotNull(message = "{anno.notnull}")
+	@Column(name = "anno")
+	private Date anno;
+
+	@NotNull(message = "{prezzo.notnull}")
+	@Min(1)
+	@Column(name = "prezzo")
+	private Integer prezzo;
+
+	@NotNull(message = "{utente.notnull}")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "utente")
+	private Utente utente;
+
+	public Acquisto() {
+	}
+
+	public Acquisto(String descrizione, Date anno, Integer prezzo) {
+		this.descrizione = descrizione;
+		this.anno = anno;
+		this.prezzo = prezzo;
+	}
+
+	public Acquisto(Long id, String descrizione, Date anno, Integer prezzo, Utente utente) {
+		this.id = id;
+		this.descrizione = descrizione;
+		this.anno = anno;
+		this.prezzo = prezzo;
+		this.utente = utente;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public Date getAnno() {
+		return anno;
+	}
+
+	public void setAnno(Date anno) {
+		this.anno = anno;
+	}
+
+	public Integer getPrezzo() {
+		return prezzo;
+	}
+
+	public void setPrezzo(Integer prezzo) {
+		this.prezzo = prezzo;
+	}
+
+	public Utente getUtente() {
+		return utente;
+	}
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
+	}
+
+}
