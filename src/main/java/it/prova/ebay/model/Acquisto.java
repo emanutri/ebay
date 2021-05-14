@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -33,9 +33,9 @@ public class Acquisto {
 	private Date anno;
 
 	@NotNull(message = "{prezzo.notnull}")
-	@Min(1)
+	@DecimalMin("0.01")
 	@Column(name = "prezzo")
-	private Integer prezzo;
+	private Double prezzo;
 
 	@NotNull(message = "{utente.notnull}")
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -45,13 +45,30 @@ public class Acquisto {
 	public Acquisto() {
 	}
 
-	public Acquisto(String descrizione, Date anno, Integer prezzo) {
+	public Acquisto(@NotBlank(message = "{descrizione.notblank}") String descrizione,
+			@NotNull(message = "{anno.notnull}") Date anno,
+			@NotNull(message = "{prezzo.notnull}") @DecimalMin("0.01") Double prezzo) {
+		super();
 		this.descrizione = descrizione;
 		this.anno = anno;
 		this.prezzo = prezzo;
 	}
 
-	public Acquisto(Long id, String descrizione, Date anno, Integer prezzo, Utente utente) {
+	public Acquisto(Long id, @NotBlank(message = "{descrizione.notblank}") String descrizione,
+			@NotNull(message = "{anno.notnull}") Date anno,
+			@NotNull(message = "{prezzo.notnull}") @DecimalMin("0.01") Double prezzo) {
+		super();
+		this.id = id;
+		this.descrizione = descrizione;
+		this.anno = anno;
+		this.prezzo = prezzo;
+	}
+
+	public Acquisto(Long id, @NotBlank(message = "{descrizione.notblank}") String descrizione,
+			@NotNull(message = "{anno.notnull}") Date anno,
+			@NotNull(message = "{prezzo.notnull}") @DecimalMin("0.01") Double prezzo,
+			@NotNull(message = "{utente.notnull}") Utente utente) {
+		super();
 		this.id = id;
 		this.descrizione = descrizione;
 		this.anno = anno;
@@ -83,11 +100,11 @@ public class Acquisto {
 		this.anno = anno;
 	}
 
-	public Integer getPrezzo() {
+	public Double getPrezzo() {
 		return prezzo;
 	}
 
-	public void setPrezzo(Integer prezzo) {
+	public void setPrezzo(Double prezzo) {
 		this.prezzo = prezzo;
 	}
 
