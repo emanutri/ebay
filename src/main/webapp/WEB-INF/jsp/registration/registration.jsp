@@ -101,7 +101,7 @@
 				<div class="form-group col-md-12">
 					<label>Username <span class="text-danger">*</span></label>
 					<spring:bind path="username">
-						<input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" autocomplete="nope" name="username" id="username" placeholder="Inserire username" value="${insert_utente_attr.username }" required>
+						<input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" autocomplete="nope" name="username" id="username" placeholder="Inserire username" value="${registra_utente_attr.username }" required>
 					</spring:bind>
 					<form:errors path="username" cssClass="error_field" /> 
 				</div>
@@ -128,6 +128,7 @@
 	       <div class="row">
 				
 				<div class="form-group col-md-6">
+					<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date' value='${registra_utente_attr.dataNascita}' />
 					<label>Data di Nascita <span class="text-danger">*</span></label>
 	                    		<spring:bind path="dataNascita">
 	                     		<input class="form-control ${status.error ? 'is-invalid' : ''}" id="dataNascita" type="date" placeholder="dd/MM/yy"

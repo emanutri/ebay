@@ -1,8 +1,10 @@
 package it.prova.ebay.service.utente;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,12 +12,17 @@ import it.prova.ebay.model.Ruolo;
 import it.prova.ebay.model.StatoUtente;
 import it.prova.ebay.model.Utente;
 import it.prova.ebay.repository.utente.UtenteRepository;
+import it.prova.ebay.service.ruolo.RuoloService;
 
 @Service
 public class UtenteServiceImpl implements UtenteService {
 
 	@Autowired
 	private UtenteRepository repository;
+	@Autowired
+	private RuoloService ruoloService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Transactional(readOnly = true)
 	public List<Utente> listAllUtenti() {
@@ -34,6 +41,14 @@ public class UtenteServiceImpl implements UtenteService {
 
 	@Transactional
 	public void inserisci(Utente utenteInstance) {
+		if(utenteInstance==null) {
+			throw new RuntimeException("Errore nell'inserimento dell'utente.");
+		}
+		utenteInstance.setPassword(passwordEncoder.encode(utenteInstance.getPassword()));
+		utenteInstance.setDataCreazione(new Date());
+		utenteInstance.setCredito(0.0);
+		utenteInstance.getRuoli().add(ruoloService.cercaPerDescrizioneECodice("Classic User", "ROLE_CLASSIC_USER"));
+		utenteInstance.setStato(StatoUtente.ATTIVO);
 		repository.save(utenteInstance);
 	}
 

@@ -17,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -59,6 +60,7 @@ public class Utente {
 	private String codiceFiscale;
 
 	@NotNull(message = "{credito.notnull}")
+	@DecimalMin("0.0")
 	@Column(name = "credito")
 	private Double credito;
 

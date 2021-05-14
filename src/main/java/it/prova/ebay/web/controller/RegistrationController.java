@@ -1,17 +1,17 @@
 package it.prova.ebay.web.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import it.prova.ebay.dto.RegistrationValid;
 import it.prova.ebay.dto.UtenteDTO;
 import it.prova.ebay.service.utente.UtenteService;
 
@@ -29,9 +29,13 @@ public class RegistrationController {
 	}
 
 	@PostMapping("/save")
-	public String saveUtente(@Valid @ModelAttribute("registra_utente_attr") UtenteDTO utenteDTO, BindingResult result,
+	public String saveUtente(@Validated(RegistrationValid.class) @ModelAttribute("registra_utente_attr") UtenteDTO utenteDTO, BindingResult result,
 			RedirectAttributes redirectAttrs) {
 
+		if(!utenteDTO.validatePassword()) {
+			result.rejectValue("confermaPassword", "confermaPassword.notequals");
+		}
+		
 		if (result.hasErrors()) {
 			return "registration/registration";
 		}

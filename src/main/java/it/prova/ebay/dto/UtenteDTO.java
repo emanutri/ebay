@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import it.prova.ebay.model.StatoUtente;
 import it.prova.ebay.model.Utente;
@@ -17,19 +18,19 @@ public class UtenteDTO {
 
 	private Long id;
 
-	@NotBlank(message = "{nome.notblank}")
+	@NotBlank(message = "{nome.notblank}", groups= RegistrationValid.class)
 	private String nome;
 
-	@NotBlank(message = "{cognome.notblank}")
+	@NotBlank(message = "{cognome.notblank}", groups= RegistrationValid.class)
 	private String cognome;
 
-	@NotBlank(message = "{username.notblank}")
+	@NotBlank(message = "{username.notblank}", groups= RegistrationValid.class)
 	private String username;
 
-	@NotBlank(message = "{password.notblank}")
+	@NotBlank(message = "{password.notblank}", groups= RegistrationValid.class)
 	private String password;
 
-	@NotBlank(message = "{confermaPassword.notblank}")
+	@NotBlank(message = "{confermaPassword.notblank}", groups= RegistrationValid.class)
 	private String confermaPassword;
 
 	@NotNull(message = "{credito.notull}")
@@ -41,7 +42,8 @@ public class UtenteDTO {
 	@NotNull(message = "{dataCreazione.notnull}")
 	private Date dataCreazione;
 
-	@NotBlank(message = "{codiceFiscale.notblank}")
+	@NotBlank(message = "{codiceFiscale.notblank}", groups= RegistrationValid.class)
+	@Size(max = 16, min = 16, message = "{codiceFiscale.sizeproblem}")
 	private String codiceFiscale;
 
 	@NotNull(message = "{stato.notnull}")
@@ -337,6 +339,15 @@ public class UtenteDTO {
 
 	public boolean isDisabilitato() {
 		return this.stato.equals(StatoUtente.DISABILITATO);
+	}
+	
+	public boolean validatePassword() {
+		
+		if(this.getPassword().equals(this.getConfermaPassword())) {
+			return true;
+		}
+		
+		return false;
 	}
 
 }
