@@ -24,7 +24,7 @@
 	  <!-- Main jumbotron for a primary marketing message or call to action -->
 	  <div class="jumbotron" >
 	    <div class="container">
-	      <h1 class="display-3">Benvenuto alla Gestione della Raccolta Film</h1>
+	      <h1 class="display-3">Benvenuto su ebay di emanuele e giacomo</h1>
 	      <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
 	    </div>
 	  </div>
@@ -42,14 +42,14 @@
 	    <!-- Example row of columns -->
 	    <div class="row">
 	      <div class="col-md-6">
-	        <h2>Gestione Registi</h2>
-	        <p>Questa funzionalità è realtiva alla Gestione dei Registi</p>
-	        <p><a class="btn btn-primary" href="regista/search" role="button">Vai alla Funzionalità &raquo;</a></p>
+	        <h2>Cerca Annunci</h2>
+	        <p>Trova l'annuncio che fa per te! <br> Tra oltre 10'000 annunci sul nostro sito puoi trovare il prodotto a prezzo scontato che preferisci</p>
+	        <p><a class="btn btn-primary" href="annuncio/search" role="button">Vai alla Funzionalità &raquo;</a></p>
 	      </div>
 	      <div class="col-md-6">
-	        <h2>Gestione Film</h2>
-	        <p>Questa funzionalità è realtiva alla Gestione di Film</p>
-	        <p><a class="btn btn-primary" href="film/search" role="button">Vai alla Funzionalità &raquo;</a></p>
+	        <h2>Area Personale</h2>
+	        <p>Questa funzionalità è realtiva alla Gestione del tuo fantastico profilo</p>
+	        <p><a class="btn btn-primary" href="utente/index" role="button">Vai alla Funzionalità &raquo;</a></p>
 	      </div>
 	    </div>
 	    

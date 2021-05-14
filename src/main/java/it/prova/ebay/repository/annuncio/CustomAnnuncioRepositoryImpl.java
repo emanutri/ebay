@@ -24,7 +24,7 @@ public class CustomAnnuncioRepositoryImpl implements CustomAnnuncioRepository {
 		Map<String, Object> parameterMap = new HashMap<>();
 
 		StringBuilder queryBuilder = new StringBuilder(
-				"select a from Annuncio a left join fetch a.utente left join fetch a.categorie c where a.id = a.id");
+				"select a from Annuncio a left join fetch a.utente u left join fetch a.categorie c where a.id = a.id");
 
 		if (annuncioExample.getAperto() != null) {
 			whereClauses.add(" a.aperto = :aperto ");
@@ -35,19 +35,19 @@ public class CustomAnnuncioRepositoryImpl implements CustomAnnuncioRepository {
 			parameterMap.put("testoAnnuncio", "%" + annuncioExample.getTestoAnnuncio() + "%");
 		}
 		if (annuncioExample.getPrezzo() != null) {
-			whereClauses.add(" a.prezzo = :prezzo ");
+			whereClauses.add(" a.prezzo >= :prezzo ");
 			parameterMap.put("prezzo", annuncioExample.getPrezzo());
 		}
 		if (annuncioExample.getDataPubblicazione() != null) {
-			whereClauses.add(" a.dataPubblicazione = :dataPubblicazione ");
+			whereClauses.add(" a.dataPubblicazione >= :dataPubblicazione ");
 			parameterMap.put("dataPubblicazione", annuncioExample.getDataPubblicazione());
 		}
 		if (annuncioExample.getUtente() != null && annuncioExample.getUtente().getId() != null) {
-			whereClauses.add(" a = :utente ");
+			whereClauses.add(" u = :utente ");
 			parameterMap.put("utente", annuncioExample.getUtente());
 		}
-		if (annuncioExample.getCategorie() != null) {
-			whereClauses.add(" a.categorie = :categorie ");
+		if (annuncioExample.getCategorie() != null && !annuncioExample.getCategorie().isEmpty()) {
+			whereClauses.add(" c = :categorie ");
 			parameterMap.put("categorie", annuncioExample.getCategorie());
 		}
 

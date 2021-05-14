@@ -95,4 +95,11 @@ public class Categoria {
 		this.codice = codice;
 	}
 
+	@Override
+	public String toString() {
+		return descrizione;
+	}
+	
+	
+
 }
