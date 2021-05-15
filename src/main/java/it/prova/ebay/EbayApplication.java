@@ -42,7 +42,6 @@ public class EbayApplication implements CommandLineRunner {
 		if (utenteServiceInstance.findByUserName("admin") == null) {
 			Utente admin = new Utente("Mario", "Rossi", "admin", passwordEncoder.encode("admin"), new Date(), StatoUtente.ATTIVO);
 			admin.setCodiceFiscale("MNGGCM94P20D704Z");
-			admin.setCredito(150.0);
 			admin.setDataNascita(new SimpleDateFormat("dd/MM/yyyy").parse("20/09/1994"));
 			admin.getRuoli().add(ruoloServiceInstance.cercaPerDescrizioneECodice("Administrator", "ROLE_ADMIN"));
 			utenteServiceInstance.inserisci(admin);
@@ -50,30 +49,21 @@ public class EbayApplication implements CommandLineRunner {
 
 		if (utenteServiceInstance.findByUserName("user") == null) {
 			Utente classicUser = new Utente("Antonio", "Verdi", "user", passwordEncoder.encode("user"), new Date(), StatoUtente.ATTIVO);
-			classicUser.getRuoli()
-					.add(ruoloServiceInstance.cercaPerDescrizioneECodice("Classic User", "ROLE_CLASSIC_USER"));
 			classicUser.setCodiceFiscale("MNGGCM94P20D704Z");
-			classicUser.setCredito(150.0);
 			classicUser.setDataNascita(new SimpleDateFormat("dd/MM/yyyy").parse("20/09/1994"));
 			utenteServiceInstance.inserisci(classicUser);
 		}
 
 		if (utenteServiceInstance.findByUserName("user1") == null) {
 			Utente classicUser1 = new Utente("Andrea", "Blue", "user1", passwordEncoder.encode("user1"), new Date(), StatoUtente.ATTIVO);
-			classicUser1.getRuoli()
-					.add(ruoloServiceInstance.cercaPerDescrizioneECodice("Classic User", "ROLE_CLASSIC_USER"));
 			classicUser1.setCodiceFiscale("MNGGCM94P20D704Z");
-			classicUser1.setCredito(150.0);
 			classicUser1.setDataNascita(new SimpleDateFormat("dd/MM/yyyy").parse("20/09/1994"));
 			utenteServiceInstance.inserisci(classicUser1);
 		}
 
 		if (utenteServiceInstance.findByUserName("user2") == null) {
 			Utente classicUser2 = new Utente("Giorgio", "Viola", "user2", passwordEncoder.encode("user2"), new Date(), StatoUtente.ATTIVO);
-			classicUser2.getRuoli()
-					.add(ruoloServiceInstance.cercaPerDescrizioneECodice("Classic User", "ROLE_CLASSIC_USER"));
 			classicUser2.setCodiceFiscale("MNGGCM94P20D704Z");
-			classicUser2.setCredito(150.0);
 			classicUser2.setDataNascita(new SimpleDateFormat("dd/MM/yyyy").parse("20/09/1994"));
 			utenteServiceInstance.inserisci(classicUser2);
 		}
