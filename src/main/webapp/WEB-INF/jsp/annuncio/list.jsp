@@ -67,9 +67,9 @@
 									<td>${annuncioItem.categorie }</td>
 									<td>${annuncioItem.aperto }</td>
 									<td>
-										<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath }/annuncio/show/${annuncioItem.id }">Visualizza</a>
-										<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath }/annuncio/edit/${annuncioItem.id }">Edit</a>
-										<a class="btn  btn-sm btn-outline-danger ml-2 mr-2" href="${pageContext.request.contextPath }/annuncio/delete/${annuncioItem.id }">Elimina</a>
+										<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath }/annuncio/show/${annuncioItem.id }">Dettaglio</a>
+										<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath }/annuncio/preparaAcquisto/${annuncioItem.id }">Compra</a>
+<%-- 										<a class="btn  btn-sm btn-outline-danger ml-2 mr-2" href="${pageContext.request.contextPath }/annuncio/delete/${annuncioItem.id }">Elimina</a> --%>
 										
 									</td>
 								</tr>

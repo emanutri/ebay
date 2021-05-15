@@ -47,7 +47,7 @@ public class CustomAnnuncioRepositoryImpl implements CustomAnnuncioRepository {
 			parameterMap.put("utente", annuncioExample.getUtente());
 		}
 		if (annuncioExample.getCategorie() != null && !annuncioExample.getCategorie().isEmpty()) {
-			whereClauses.add(" c = :categorie ");
+			whereClauses.add(" a.categorie = :categorie ");
 			parameterMap.put("categorie", annuncioExample.getCategorie());
 		}
 

@@ -5,10 +5,12 @@ import java.util.List;
 import it.prova.ebay.model.Annuncio;
 
 public interface AnnuncioService {
-	
+
 	public List<Annuncio> listAllAnnunci();
 
-	public Annuncio caricaSingoloUtente(Long id);
+	public Annuncio caricaSingoloAnnuncio(Long id);
+
+	public Annuncio caricaSingoloAnnuncioEager(Long id);
 
 	public void aggiorna(Annuncio annuncioInstance);
 
@@ -17,6 +19,5 @@ public interface AnnuncioService {
 	public void rimuovi(Annuncio annuncioInstance);
 
 	public List<Annuncio> findByExample(Annuncio annuncioExample);
-
 
 }

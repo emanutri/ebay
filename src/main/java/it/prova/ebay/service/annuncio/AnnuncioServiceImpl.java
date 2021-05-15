@@ -21,8 +21,13 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 	}
 
 	@Transactional(readOnly = true)
-	public Annuncio caricaSingoloUtente(Long id) {
+	public Annuncio caricaSingoloAnnuncio(Long id) {
 		return repository.findById(id).orElse(null);
+	}
+	
+	@Transactional(readOnly = true)
+	public Annuncio caricaSingoloAnnuncioEager(Long id) {
+		return repository.findSingleAnnuncioEager(id);
 	}
 
 	@Transactional

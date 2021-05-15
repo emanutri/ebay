@@ -26,8 +26,8 @@ public class AnnuncioDTO {
 	@NotNull(message = "{prezzo.notnull}")
 	private Double prezzo;
 
-	@NotNull(message = "{data.notnull}")
-	private Date data;
+	@NotNull(message = "{dataPubblicazione.notnull}")
+	private Date dataPubblicazione;
 
 	@NotNull(message = "{utente.notnull}")
 	private Utente utente;
@@ -37,22 +37,22 @@ public class AnnuncioDTO {
 	public AnnuncioDTO() {
 	}
 
-	public AnnuncioDTO(Long id, Boolean aperto, String testoAnnuncio, Double prezzo, Date data, Utente utente) {
+	public AnnuncioDTO(Long id, Boolean aperto, String testoAnnuncio, Double prezzo, Date dataPubblicazione, Utente utente) {
 		this.id=id;
 		this.aperto=aperto;
 		this.testoAnnuncio=testoAnnuncio;
 		this.prezzo=prezzo;
-		this.data=data;
+		this.dataPubblicazione=dataPubblicazione;
 		this.utente=utente;
 	}
 
-	public AnnuncioDTO(Long id, Boolean aperto, String testoAnnuncio, Double prezzo, Date data,
+	public AnnuncioDTO(Long id, Boolean aperto, String testoAnnuncio, Double prezzo, Date dataPubblicazione,
 			Utente utente, Set<Categoria> categorie) {
 		this.id=id;
 		this.aperto=aperto;
 		this.testoAnnuncio=testoAnnuncio;
 		this.prezzo=prezzo;
-		this.data=data;
+		this.dataPubblicazione=dataPubblicazione;
 		this.utente=utente;
 		this.categorie=categorie;
 	}
@@ -90,11 +90,11 @@ public class AnnuncioDTO {
 	}
 
 	public Date getData() {
-		return data;
+		return dataPubblicazione;
 	}
 
 	public void setData(Date data) {
-		this.data = data;
+		this.dataPubblicazione = data;
 	}
 
 	public Utente getUtente() {
@@ -114,13 +114,13 @@ public class AnnuncioDTO {
 	}
 
 	public Annuncio buildAnnuncioModel() {
-		return new Annuncio(this.id, this.aperto, this.testoAnnuncio, this.prezzo, this.data, this.utente);
+		return new Annuncio(this.id, this.aperto, this.testoAnnuncio, this.prezzo, this.dataPubblicazione, this.utente);
 	}
 
 	public static AnnuncioDTO createAnnuncioDTOInstanceFromParams(Long id, Boolean aperto, String testoAnnuncio,
-			Double prezzo, Date data, Utente utente, Set<Categoria> categorie) {
+			Double prezzo, Date dataPubblicazione, Utente utente, Set<Categoria> categorie) {
 
-		AnnuncioDTO result = new AnnuncioDTO(id, aperto, testoAnnuncio, prezzo, data, utente);
+		AnnuncioDTO result = new AnnuncioDTO(id, aperto, testoAnnuncio, prezzo, dataPubblicazione, utente);
 
 		return result;
 	}

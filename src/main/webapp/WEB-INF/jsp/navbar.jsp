@@ -16,10 +16,10 @@
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" href="${pageContext.request.contextPath}/home">Home</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/regista/search">Ricerca Registi</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/regista/insert">Inserisci Regista</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/film/search">Ricerca Film</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/film/insert">Inserisci Film</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/annuncio/search">Ricerca Annunci</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/annuncio/insert">Inserisci Annuncio</a>
+<%--           <a class="dropdown-item" href="${pageContext.request.contextPath}/film/search">Ricerca Film</a> --%>
+<%--           <a class="dropdown-item" href="${pageContext.request.contextPath}/film/insert">Inserisci Film</a> --%>
         </div>
       </li>
       <sec:authorize access="hasRole('ADMIN')">
