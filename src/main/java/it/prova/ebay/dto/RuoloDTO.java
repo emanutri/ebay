@@ -62,7 +62,7 @@ public class RuoloDTO {
 	}
 
 	public static RuoloDTO createDTOFromModel(Ruolo ruoloInstance) {
-		return new RuoloDTO(ruoloInstance.getDescrizione(), ruoloInstance.getCodice());
+		return new RuoloDTO(ruoloInstance.getId(), ruoloInstance.getDescrizione(), ruoloInstance.getCodice());
 	}
 
 	public static Set<Ruolo> createRuoloModelListFromDTOList(Set<RuoloDTO> dtoListInput) {
@@ -72,5 +72,5 @@ public class RuoloDTO {
 	public static Set<RuoloDTO> createRuoloDTOListFromModelList(List<Ruolo> modelListInput) {
 		return modelListInput.stream().map(ruoloEntity -> createDTOFromModel(ruoloEntity)).collect(Collectors.toSet());
 	}
-
+	
 }

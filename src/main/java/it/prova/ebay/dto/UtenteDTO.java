@@ -18,32 +18,32 @@ public class UtenteDTO {
 
 	private Long id;
 
-	@NotBlank(message = "{nome.notblank}", groups= RegistrationValid.class)
+	@NotBlank(message = "{nome.notblank}", groups = RegistrationValid.class)
 	private String nome;
 
-	@NotBlank(message = "{cognome.notblank}", groups= RegistrationValid.class)
+	@NotBlank(message = "{cognome.notblank}", groups = RegistrationValid.class)
 	private String cognome;
 
-	@NotBlank(message = "{username.notblank}", groups= RegistrationValid.class)
+	@NotBlank(message = "{username.notblank}", groups = RegistrationValid.class)
 	private String username;
 
-	@NotBlank(message = "{password.notblank}", groups= RegistrationValid.class)
+	@NotBlank(message = "{password.notblank}", groups = RegistrationValid.class)
 	private String password;
 
-	@NotBlank(message = "{confermaPassword.notblank}", groups= RegistrationValid.class)
+	@NotBlank(message = "{confermaPassword.notblank}", groups = RegistrationValid.class)
 	private String confermaPassword;
 
 	@NotNull(message = "{credito.notull}")
 	private Double credito;
 
-	@NotNull(message = "{dataNascita.notnull}")
+	@NotNull(message = "{dataNascita.notnull}", groups = RegistrationValid.class)
 	private Date dataNascita;
 
 	@NotNull(message = "{dataCreazione.notnull}")
 	private Date dataCreazione;
 
-	@NotBlank(message = "{codiceFiscale.notblank}", groups= RegistrationValid.class)
-	@Size(max = 16, min = 16, message = "{codiceFiscale.sizeproblem}")
+	@NotBlank(message = "{codiceFiscale.notblank}", groups = RegistrationValid.class)
+	@Size(max = 16, min = 16, message = "{codiceFiscale.sizeproblem}", groups = RegistrationValid.class)
 	private String codiceFiscale;
 
 	@NotNull(message = "{stato.notnull}")
@@ -290,6 +290,18 @@ public class UtenteDTO {
 		this.stato = stato;
 	}
 
+	public UtenteDTO(Long id, @NotBlank String nome, @NotBlank String cognome, @NotBlank String username,
+			@NotNull Date dataCreazione, @NotNull StatoUtente stato) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.username = username;
+		this.dataCreazione = dataCreazione;
+		this.stato = stato;
+
+	}
+
 	public Utente buildUtenteModel() {
 		return new Utente(this.nome, this.cognome, this.username, this.password, this.dataNascita, this.dataCreazione,
 				this.codiceFiscale, this.credito, this.stato, RuoloDTO.createRuoloModelListFromDTOList(this.ruoli));
@@ -320,8 +332,8 @@ public class UtenteDTO {
 	}
 
 	public static UtenteDTO createDTOFromModel(Utente utenteInstance) {
-		return new UtenteDTO(utenteInstance.getNome(), utenteInstance.getCognome(), utenteInstance.getUsername(),
-				utenteInstance.getDataCreazione(), utenteInstance.getStato());
+		return new UtenteDTO(utenteInstance.getId(), utenteInstance.getNome(), utenteInstance.getCognome(),
+				utenteInstance.getUsername(), utenteInstance.getDataCreazione(), utenteInstance.getStato());
 	}
 
 	public static List<Utente> createUtenteModelListFromDTOList(List<UtenteDTO> dtoListInput) {
@@ -340,13 +352,13 @@ public class UtenteDTO {
 	public boolean isDisabilitato() {
 		return this.stato.equals(StatoUtente.DISABILITATO);
 	}
-	
+
 	public boolean validatePassword() {
-		
-		if(this.getPassword().equals(this.getConfermaPassword())) {
+
+		if (this.getPassword().equals(this.getConfermaPassword())) {
 			return true;
 		}
-		
+
 		return false;
 	}
 

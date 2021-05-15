@@ -27,12 +27,6 @@
 		    <span aria-hidden="true">&times;</span>
 		  </button>
 		</div>
-		<div class="alert alert-info alert-dismissible fade show d-none" role="alert">
-		  Aggiungere d-none nelle class per non far apparire
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		    <span aria-hidden="true">&times;</span>
-		  </button>
-		</div>
 		
 		<div class='card'>
 		    <div class='card-header'>
@@ -65,7 +59,7 @@
 									<td>
 										<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath }/utente/show/${utenteItem.id }">Visualizza</a>
 										<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath }/utente/edit/${utenteItem.id }">Edit</a>
-										<a id="changeStatoLink_#_${utenteItem.id }" class="btn btn-outline-${utenteItem.isAttivo()?'danger':'success'} btn-sm link-for-modal" data-toggle="modal" data-target="#confirmOperationModal"  >${utenteItem.isAttivo()?'Disabilita':'Abilita'}</a>
+										<a id="changeStatoLink_#_${utenteItem.id }" class="btn btn-outline-${utenteItem.isAttivo()?'danger':'success'} btn-sm link-for-modal" data-toggle="modal" data-target="#confirmOperationModal" title = ${utenteItem.isAttivo()?'attivo':'disabilitato' }>${utenteItem.isAttivo()?'Disabilita':'Abilita'}</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -81,8 +75,6 @@
 	<!-- end container -->	
 	</main>
 	<jsp:include page="../footer.jsp" />
-	
-	
 	
 	<!-- Modal -->
 	<div class="modal fade" id="confirmOperationModal" tabindex="-1" role="dialog" aria-labelledby="confirmOperationModalLabel"

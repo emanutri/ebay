@@ -41,7 +41,7 @@ public class UtenteServiceImpl implements UtenteService {
 
 	@Transactional
 	public void inserisci(Utente utenteInstance) {
-		if(utenteInstance==null) {
+		if (utenteInstance == null) {
 			throw new RuntimeException("Errore nell'inserimento dell'utente.");
 		}
 		utenteInstance.setPassword(passwordEncoder.encode(utenteInstance.getPassword()));
@@ -69,9 +69,19 @@ public class UtenteServiceImpl implements UtenteService {
 
 	@Transactional
 	public void invertUserAbilitation(Long utenteInstanceId) {
+		if (utenteInstanceId == null || utenteInstanceId < 1) {
+			throw new RuntimeException("Input invalido.");
+		}
 		Utente utenteInstance = caricaSingoloUtente(utenteInstanceId);
 		if (utenteInstance == null) {
 			throw new RuntimeException("Elemento non trovato.");
+		}
+		if (utenteInstance.isAdmin() && repository
+				.findByRuoliAndStato(ruoloService.cercaPerDescrizioneECodice("Administrator", "ROLE_ADMIN"),
+						StatoUtente.ATTIVO)
+				.size() == 1) {
+			throw new RuntimeException("Impossibile eliminare l'ultimo Admin!!!");
+
 		}
 		if (utenteInstance.getStato().equals(StatoUtente.ATTIVO)) {
 			utenteInstance.setStato(StatoUtente.DISABILITATO);

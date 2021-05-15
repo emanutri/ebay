@@ -20,5 +20,7 @@ public interface UtenteRepository extends CrudRepository<Utente, Long>, CustomUt
 	@EntityGraph(attributePaths = { "ruoli" })
 	List<Utente> findByCognomeIgnoreCaseContainingAndNomeIgnoreCaseContainingAndRuoli(String cognome, String nome,
 			Ruolo ruolo);
+	
+	List<Utente> findByRuoliAndStato(Ruolo ruolo, StatoUtente stato);
 
 }

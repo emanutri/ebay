@@ -59,9 +59,11 @@
 	  </div>
 	  
 		<spring:hasBindErrors  name="registra_utente_attr">
-			<%-- alert errori --%>
-			<div class="alert alert-danger " role="alert">
+			<div class="alert alert-dismissible alert-danger " role="alert">
 				Attenzione!! Sono presenti errori di validazione
+			 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
 			</div>
 		</spring:hasBindErrors>
 		
@@ -97,6 +99,7 @@
 					<form:errors  path="cognome" cssClass="error_field" />
 				</div>
 			</div>
+			
 		    <div class="row">
 				<div class="form-group col-md-12">
 					<label>Username <span class="text-danger">*</span></label>
@@ -106,6 +109,7 @@
 					<form:errors path="username" cssClass="error_field" /> 
 				</div>
 			</div>
+			
 	       <div class="row">
 		        <div class="col-md-6 mb-3">
 					<label>Password <span class="text-danger">*</span></label>
@@ -122,7 +126,6 @@
 							</spring:bind>
 							<form:errors path="confermaPassword" cssClass="error_field" />
 				</div>
-				
 	        </div>
 	       
 	       <div class="row">
@@ -149,7 +152,6 @@
 	        </div>
 	        <br>
 	        <br>
-	              
 	        <button class="btn btn-primary btn-lg btn-block" type="submit">Registrati</button>
         	<a href="${pageContext.request.contextPath}/home" class='btn btn-outline-secondary btn-lg btn-block' >
 	            <i class='fa fa-chevron-left'></i> Back

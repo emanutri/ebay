@@ -24,7 +24,7 @@ public class CustomUtenteRepositoryImpl implements CustomUtenteRepository {
 		List<String> whereClauses = new ArrayList<>();
 		Map<String, Object> parameterMap = new HashMap<>();
 
-		StringBuilder queryBuilder = new StringBuilder("select u from Utente u join fetch u.ruoli r "
+		StringBuilder queryBuilder = new StringBuilder("select u from Utente u left join fetch u.ruoli r "
 				+ "left join fetch u.annunci a left join fech u.acquisti b where u.id = u.id");
 
 		if (StringUtils.isNotBlank(utenteInstance.getNome())) {
@@ -44,11 +44,11 @@ public class CustomUtenteRepositoryImpl implements CustomUtenteRepository {
 			parameterMap.put("codiceFiscale", "%" + utenteInstance.getCodiceFiscale() + "%");
 		}
 		if (utenteInstance.getDataNascita() != null) {
-			whereClauses.add(" u.dataNascita = :dataNascita ");
+			whereClauses.add(" u.dataNascita >= :dataNascita ");
 			parameterMap.put("dataNascita", utenteInstance.getDataNascita());
 		}
 		if (utenteInstance.getDataCreazione() != null) {
-			whereClauses.add(" u.dataCreazione = :dataCreazione ");
+			whereClauses.add(" u.dataCreazione >= :dataCreazione ");
 			parameterMap.put("dataCreazione", utenteInstance.getDataCreazione());
 		}
 		if (utenteInstance.getCredito() != null && utenteInstance.getCredito()>=0) {
