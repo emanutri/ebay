@@ -64,6 +64,7 @@ public class AnnuncioController {
 	
 	@GetMapping("/insert")
 	public String createAnnuncio(Model model) {
+		model.addAttribute("insert_utente_annuncio", UtenteDTO.createUtenteDTOListFromModelList(utenteService.listAllUtenti()));
 		model.addAttribute("insert_annuncio_attr", new AnnuncioDTO());
 		return "annuncio/insert";
 	}

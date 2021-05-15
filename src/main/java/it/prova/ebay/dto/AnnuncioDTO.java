@@ -89,12 +89,12 @@ public class AnnuncioDTO {
 		this.prezzo = prezzo;
 	}
 
-	public Date getData() {
+	public Date getDataPubblicazione() {
 		return dataPubblicazione;
 	}
 
-	public void setData(Date data) {
-		this.dataPubblicazione = data;
+	public void setDataPubblicazione(Date dataPubblicazione) {
+		this.dataPubblicazione = dataPubblicazione;
 	}
 
 	public Utente getUtente() {
@@ -127,7 +127,7 @@ public class AnnuncioDTO {
 	
 	public static Annuncio createModelFromDTO(AnnuncioDTO annuncioInstance) {
 		return new Annuncio(annuncioInstance.getId(), annuncioInstance.getAperto(), annuncioInstance.getTestoAnnuncio(), annuncioInstance.getPrezzo(),
-				annuncioInstance.getData(), annuncioInstance.getUtente(), annuncioInstance.getCategorie());
+				annuncioInstance.getDataPubblicazione(), annuncioInstance.getUtente(), annuncioInstance.getCategorie());
 	}
 	
 	public static AnnuncioDTO createDTOFromModel(Annuncio annuncioInstance) {

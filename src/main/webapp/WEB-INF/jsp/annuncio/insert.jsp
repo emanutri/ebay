@@ -79,13 +79,6 @@
                             	<form:errors  path="dataPubblicazione" cssClass="error_field" />
 							</div>
 							
-							<div class="form-group col-md-6">
-								<label for="minutiDurata">Durata (minuti)</label>
-								<spring:bind path="minutiDurata">
-									<input type="number" class="form-control ${status.error ? 'is-invalid' : ''}" name="minutiDurata" id="minutiDurata" placeholder="Inserire la durata" value="${insert_film_attr.minutiDurata }">
-								</spring:bind>
-								<form:errors  path="minutiDurata" cssClass="error_field" />
-							</div>
 						</div>
 						
 <!-- 						<div class="form-row"> -->
@@ -103,21 +96,30 @@
 						<div class="form-row">
 							<div class="form-group col-md-3" style = "padding-top: 3px;">
 								<div class="form-check-inline">
-								  <label class="form-check-label">
-								    <input type="radio" class="form-check-input" name="optradio">Attivo
+								  <label class="form-check-label" for="annuncio.aperto">
+								    <input type="radio" class="form-check-input" name="annuncio.aperto" value="${insert_annuncio_attr.aperto}" checked="checked">Attivo
 								  </label>
 								</div>
 								<div class="form-check-inline">
-								  <label class="form-check-label">
-								    <input type="radio" class="form-check-input" name="optradio">Disattivo
+								  <label class="form-check-label" for="annuncio.aperto">
+								    <input type="radio" class="form-check-input" name="annuncio.aperto" value="${insert_annuncio_attr.aperto=='error'}">Disattivo
 								  </label>
 								</div>
 							</div>	
+							<div class="form-group col-md-6">
+								<label for="utente">Utente</label>
+							    <select class="form-control" id="utente" name="utente">
+							    	<option value="" selected> -- Selezionare una voce -- </option>
+							      	<c:forEach items="${insert_utente_annuncio }" var="utenteItem">
+							      		<option value="${utenteItem.id}" ${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} >${utenteItem.nome } ${utenteItem.cognome }</option>
+							      	</c:forEach>
+							    </select>
+							</div>
 <!-- 							<div class="form-group col-md-6"> -->
-<!-- 								<label for="regista.id">Utente</label> -->
+<!-- 								<label for="categorie">Categorie</label> -->
 <!-- 							    <select class="form-control" id="utente" name="utente"> -->
 <!-- 							    	<option value="" selected> -- Selezionare una voce -- </option> -->
-<%-- 							      	<c:forEach items="${utenti_list_attribute }" var="utenteItem"> --%>
+<%-- 							      	<c:forEach items="${insert_annuncio_attr.categorie }" var="utenteItem"> --%>
 <%-- 							      		<option value="${utenteItem.id}" ${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} >${utenteItem.nome } ${utenteItem.cognome }</option> --%>
 <%-- 							      	</c:forEach> --%>
 <!-- 							    </select> -->
