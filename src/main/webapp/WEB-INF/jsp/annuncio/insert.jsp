@@ -80,50 +80,41 @@
 							</div>
 							
 							<div class="form-group col-md-6">
-								<label for="minutiDurata">Durata (minuti)</label>
-								<spring:bind path="minutiDurata">
-									<input type="number" class="form-control ${status.error ? 'is-invalid' : ''}" name="minutiDurata" id="minutiDurata" placeholder="Inserire la durata" value="${insert_film_attr.minutiDurata }">
-								</spring:bind>
-								<form:errors  path="minutiDurata" cssClass="error_field" />
+								<label for="categorie">Categorie</label>
+							    <select class="form-control" id="categoria" name="categoria">
+							    	<option value="" selected> -- Selezionare una voce -- </option>
+							      	<c:forEach items="${insert_categoria_attr }" var="categoriaItem">
+							      		<option value="${categoriaItem.id}" >${categoriaItem.descrizione }</option>
+							      	</c:forEach>
+							    </select>
 							</div>
+							
 						</div>
-						
-<!-- 						<div class="form-row"> -->
-<!-- 							<div class="form-group col-md-6"> -->
-<!-- 								<label for="registaSearchInput">Regista:</label> -->
-<%-- 								<spring:bind path="regista"> --%>
-<%-- 									<input class="form-control ${status.error ? 'is-invalid' : ''}" type="text" id="registaSearchInput" --%>
-<%-- 										name="registaInput" value="${insert_film_attr.regista.nome}${empty insert_film_attr.regista.nome?'':' '}${insert_film_attr.regista.cognome}"> --%>
-<%-- 								</spring:bind> --%>
-<%-- 								<input type="hidden" name="regista" id="registaId" value="${insert_film_attr.regista.id}"> --%>
-<%-- 								<form:errors  path="regista" cssClass="error_field" /> --%>
-<!-- 							</div> -->
-<!-- 						</div> -->
 						
 						<div class="form-row">
 							<div class="form-group col-md-3" style = "padding-top: 3px;">
 								<div class="form-check-inline">
-								  <label class="form-check-label">
-								    <input type="radio" class="form-check-input" name="optradio">Attivo
+								  <label class="form-check-label" for="annuncio.aperto">
+								    <input type="radio" class="form-check-input" name="annuncio.aperto" value="${insert_annuncio_attr.aperto}" checked="checked">Attivo
 								  </label>
 								</div>
 								<div class="form-check-inline">
-								  <label class="form-check-label">
-								    <input type="radio" class="form-check-input" name="optradio">Disattivo
+								  <label class="form-check-label" for="annuncio.aperto">
+								    <input type="radio" class="form-check-input" name="annuncio.aperto" value="${insert_annuncio_attr.aperto=='error'}">Disattivo
 								  </label>
 								</div>
 							</div>	
-<!-- 							<div class="form-group col-md-6"> -->
-<!-- 								<label for="regista.id">Utente</label> -->
-<!-- 							    <select class="form-control" id="utente" name="utente"> -->
-<!-- 							    	<option value="" selected> -- Selezionare una voce -- </option> -->
-<%-- 							      	<c:forEach items="${utenti_list_attribute }" var="utenteItem"> --%>
-<%-- 							      		<option value="${utenteItem.id}" ${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} >${utenteItem.nome } ${utenteItem.cognome }</option> --%>
-<%-- 							      	</c:forEach> --%>
-<!-- 							    </select> -->
-<!-- 							</div> -->
-- 						</div> 
-							
+							<div class="form-group col-md-6" >
+								<label for="utente">Utente</label>
+							    <select class="form-control" id="utente" name="utente">
+							    	<option value="" selected> -- Selezionare una voce -- </option>
+							      	<c:forEach items="${insert_utente_annuncio }" var="utenteItem">
+							      		<option value="${utenteItem}" ${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} >${utenteItem.nome } ${utenteItem.cognome }</option>
+							      	</c:forEach>
+							    </select>
+							</div>
+ 						</div> 
+<%-- 						<input type ="hidden" name="utente" value ="${insert_annuncio_attr.utente.id}"> --%>
 						<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
 						
 					</form:form>

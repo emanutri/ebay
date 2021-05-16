@@ -64,18 +64,25 @@ public class AnnuncioController {
 	
 	@GetMapping("/insert")
 	public String createAnnuncio(Model model) {
+		model.addAttribute("insert_utente_annuncio", UtenteDTO.createUtenteDTOListFromModelList(utenteService.listAllUtenti()));
 		model.addAttribute("insert_annuncio_attr", new AnnuncioDTO());
+		model.addAttribute("insert_categoria_attr", CategoriaDTO.createCategoriaDTOListFromModelList(categoriaService.listAllCategorie()));
 		return "annuncio/insert";
 	}
 
 	@PostMapping("/save")
 	public String saveAnnuncio(@Valid @ModelAttribute("insert_annuncio_attr") AnnuncioDTO annuncioDTO, BindingResult result,
-			RedirectAttributes redirectAttrs, HttpServletRequest request) {
+			RedirectAttributes redirectAttrs, HttpServletRequest request, Model model) {
 
 		if (result.hasErrors()) {
+			model.addAttribute("insert_annuncio_attr", annuncioDTO);
+			model.addAttribute("insert_utente_annuncio", UtenteDTO.createUtenteDTOListFromModelList(utenteService.listAllUtenti()));
+			model.addAttribute("insert_categoria_attr", CategoriaDTO.createCategoriaDTOListFromModelList(categoriaService.listAllCategorie()));
 			return "annuncio/insert";
 		}
-		annuncioService.inserisci(AnnuncioDTO.createModelFromDTO(annuncioDTO));
+		Annuncio annuncioTemp = AnnuncioDTO.createModelFromDTO(annuncioDTO);
+		annuncioTemp.setUtente(annuncioDTO.getUtente());
+		annuncioService.inserisci(annuncioTemp);
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/annuncio";
