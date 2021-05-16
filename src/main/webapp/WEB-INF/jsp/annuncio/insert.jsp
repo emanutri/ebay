@@ -79,19 +79,17 @@
                             	<form:errors  path="dataPubblicazione" cssClass="error_field" />
 							</div>
 							
+							<div class="form-group col-md-6">
+								<label for="categorie">Categorie</label>
+							    <select class="form-control" id="categoria" name="categoria">
+							    	<option value="" selected> -- Selezionare una voce -- </option>
+							      	<c:forEach items="${insert_categoria_attr }" var="categoriaItem">
+							      		<option value="${categoriaItem.id}" >${categoriaItem.descrizione }</option>
+							      	</c:forEach>
+							    </select>
+							</div>
+							
 						</div>
-						
-<!-- 						<div class="form-row"> -->
-<!-- 							<div class="form-group col-md-6"> -->
-<!-- 								<label for="registaSearchInput">Regista:</label> -->
-<%-- 								<spring:bind path="regista"> --%>
-<%-- 									<input class="form-control ${status.error ? 'is-invalid' : ''}" type="text" id="registaSearchInput" --%>
-<%-- 										name="registaInput" value="${insert_film_attr.regista.nome}${empty insert_film_attr.regista.nome?'':' '}${insert_film_attr.regista.cognome}"> --%>
-<%-- 								</spring:bind> --%>
-<%-- 								<input type="hidden" name="regista" id="registaId" value="${insert_film_attr.regista.id}"> --%>
-<%-- 								<form:errors  path="regista" cssClass="error_field" /> --%>
-<!-- 							</div> -->
-<!-- 						</div> -->
 						
 						<div class="form-row">
 							<div class="form-group col-md-3" style = "padding-top: 3px;">
@@ -106,26 +104,17 @@
 								  </label>
 								</div>
 							</div>	
-							<div class="form-group col-md-6">
+							<div class="form-group col-md-6" >
 								<label for="utente">Utente</label>
 							    <select class="form-control" id="utente" name="utente">
 							    	<option value="" selected> -- Selezionare una voce -- </option>
 							      	<c:forEach items="${insert_utente_annuncio }" var="utenteItem">
-							      		<option value="${utenteItem.id}" ${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} >${utenteItem.nome } ${utenteItem.cognome }</option>
+							      		<option value="${utenteItem}" ${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} >${utenteItem.nome } ${utenteItem.cognome }</option>
 							      	</c:forEach>
 							    </select>
 							</div>
-<!-- 							<div class="form-group col-md-6"> -->
-<!-- 								<label for="categorie">Categorie</label> -->
-<!-- 							    <select class="form-control" id="utente" name="utente"> -->
-<!-- 							    	<option value="" selected> -- Selezionare una voce -- </option> -->
-<%-- 							      	<c:forEach items="${insert_annuncio_attr.categorie }" var="utenteItem"> --%>
-<%-- 							      		<option value="${utenteItem.id}" ${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} >${utenteItem.nome } ${utenteItem.cognome }</option> --%>
-<%-- 							      	</c:forEach> --%>
-<!-- 							    </select> -->
-<!-- 							</div> -->
-- 						</div> 
-							
+ 						</div> 
+<%-- 						<input type ="hidden" name="utente" value ="${insert_annuncio_attr.utente.id}"> --%>
 						<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
 						
 					</form:form>
