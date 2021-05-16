@@ -93,7 +93,8 @@ public class UtenteController {
 		}
 
 		if (result.hasErrors()) {
-			model.addAttribute("list_ruoli_attr", RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAllRuoli()));
+			model.addAttribute("list_ruoli_attr",
+					RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAllRuoli()));
 			model.addAttribute("list_stati_attribute", StatoUtente.values());
 			return "utente/insert";
 		}
@@ -104,19 +105,21 @@ public class UtenteController {
 
 	@GetMapping("/edit/{idUtente}")
 	public String editUtente(@PathVariable(required = true) Long idUtente, Model model) {
-		model.addAttribute("edit_utente_attr", UtenteDTO.createDTOFromModelForEdit(utenteService.caricaSingoloUtenteEager(idUtente)));
+		model.addAttribute("edit_utente_attr",
+				UtenteDTO.createDTOFromModelForEdit(utenteService.caricaSingoloUtenteEager(idUtente)));
 		model.addAttribute("list_stati_attribute", StatoUtente.values());
 		model.addAttribute("list_ruoli_attr", RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAllRuoli()));
 		return "utente/edit";
 	}
-	
+
 	@PostMapping("/edit/update")
 	public String updateUtente(
 			@Validated(RegistrationOrInsertValid.class) @ModelAttribute("edit_utente_attr") UtenteDTO utenteDTO,
 			BindingResult result, RedirectAttributes redirectAttrs, Model model) {
 
 		if (result.hasErrors()) {
-			model.addAttribute("list_ruoli_attr", RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAllRuoli()));
+			model.addAttribute("list_ruoli_attr",
+					RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAllRuoli()));
 			model.addAttribute("list_stati_attribute", StatoUtente.values());
 			return "utente/edit";
 		}
@@ -124,6 +127,15 @@ public class UtenteController {
 		utenteService.aggiorna(utenteDTO.buildUtenteModel());
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/utente";
+	}
+
+	@GetMapping("/show/{idUtente}")
+	public String showUtente(@PathVariable(required = true) Long idUtente, Model model) {
+		model.addAttribute("show_utente_attr",
+				UtenteDTO.createDTOFromModelForShow(utenteService.caricaSingoloUtenteEager(idUtente)));
+		model.addAttribute("list_ruoli_attr", RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAllRuoli()));
+		model.addAttribute("list_stati_attribute", StatoUtente.values());
+		return "utente/show";
 	}
 
 	public Set<RuoloDTO> convertParamsInDTO(String[] ruoliParams) {

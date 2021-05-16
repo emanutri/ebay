@@ -64,24 +64,24 @@
 							</div>
 						</div>
 							
-							<div class="form-row">	
-								<div class="form-group col-md-6">
-									<label>Username <span class="text-danger">*</span></label>
-									<spring:bind path="username">
-										<input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" autocomplete="nope" name="username" id="username" placeholder="Inserire username" value="${edit_utente_attr.username }" required>
-									</spring:bind>
-									<form:errors path="username" cssClass="error_field" /> 
-								</div>
+						<div class="form-row">	
+							<div class="form-group col-md-6">
+								<label>Username <span class="text-danger">*</span></label>
+								<spring:bind path="username">
+									<input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" autocomplete="nope" name="username" id="username" placeholder="Inserire username" value="${edit_utente_attr.username }" required>
+								</spring:bind>
+								<form:errors path="username" cssClass="error_field" /> 
+							</div>
 
-								<div class="form-group col-md-6">
-									<label>Codice Fiscale <span class="text-danger">*</span></label>
-									<spring:bind path="codiceFiscale">
-										<input type="text" name="codiceFiscale" id="codiceFiscale" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il codice fiscale" value="${edit_utente_attr.codiceFiscale }" required>
-									</spring:bind>
-									<form:errors  path="codiceFiscale" cssClass="error_field" />
-								</div>
-				        
-			       			 </div>
+							<div class="form-group col-md-6">
+								<label>Codice Fiscale <span class="text-danger">*</span></label>
+								<spring:bind path="codiceFiscale">
+									<input type="text" name="codiceFiscale" id="codiceFiscale" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il codice fiscale" value="${edit_utente_attr.codiceFiscale }" required>
+								</spring:bind>
+								<form:errors  path="codiceFiscale" cssClass="error_field" />
+							</div>
+			        
+		       			</div>
 			       		<div class="form-row">
 			       			<div class="form-group col-md-6">
 									<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date' value='${edit_utente_attr.dataNascita}' />
@@ -129,7 +129,6 @@
 								<form:errors  path="credito" cssClass="error_field" />
 							</div>
 						</div>
-
 			    </div>
 			    <div class='card-footer'>
 						<a href="${pageContext.request.contextPath }/utente/" class='btn btn-outline-secondary' style='width:80px'>
@@ -140,8 +139,6 @@
 		    </div>
 		  	</form:form>
 			</div>
-		
-		
 		<!-- end container -->	
 		</main>
 		<jsp:include page="../footer.jsp" />

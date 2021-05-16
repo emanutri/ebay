@@ -1,5 +1,6 @@
 package it.prova.ebay.dto;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -139,8 +140,8 @@ public class AnnuncioDTO {
 		return dtoListInput.stream().map(utenteEntity -> createModelFromDTO(utenteEntity)).collect(Collectors.toList());
 	}
 
-	public static List<AnnuncioDTO> createAnnuncioDTOListFromModelList(List<Annuncio> modelListInput) {
+	public static Set<AnnuncioDTO> createAnnuncioDTOListFromModelList(Collection<Annuncio> modelListInput) {
 		return modelListInput.stream().map(utenteEntity -> createDTOFromModel(utenteEntity))
-				.collect(Collectors.toList());
+				.collect(Collectors.toSet());
 	}
 }

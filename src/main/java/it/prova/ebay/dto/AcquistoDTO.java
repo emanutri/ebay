@@ -1,7 +1,9 @@
 package it.prova.ebay.dto;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
@@ -120,9 +122,9 @@ public class AcquistoDTO {
 		return dtoListInput.stream().map(utenteEntity -> createModelFromDTO(utenteEntity)).collect(Collectors.toList());
 	}
 
-	public static List<AcquistoDTO> createAcquistoDTOListFromModelList(List<Acquisto> modelListInput) {
+	public static Set<AcquistoDTO> createAcquistoDTOListFromModelList(Collection<Acquisto> modelListInput) {
 		return modelListInput.stream().map(utenteEntity -> createDTOFromModel(utenteEntity))
-				.collect(Collectors.toList());
+				.collect(Collectors.toSet());
 	}
 
 

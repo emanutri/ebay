@@ -18,13 +18,13 @@ public class UtenteDTO {
 
 	private Long id;
 
-	@NotBlank(message = "{nome.notblank}", groups = RegistrationOrInsertValid.class)
+	@NotBlank(message = "{nome.notblank}", groups = { RegistrationOrInsertValid.class, UpdateValid.class })
 	private String nome;
 
-	@NotBlank(message = "{cognome.notblank}", groups = RegistrationOrInsertValid.class)
+	@NotBlank(message = "{cognome.notblank}", groups = { RegistrationOrInsertValid.class, UpdateValid.class })
 	private String cognome;
 
-	@NotBlank(message = "{username.notblank}", groups = RegistrationOrInsertValid.class)
+	@NotBlank(message = "{username.notblank}", groups = { RegistrationOrInsertValid.class, UpdateValid.class })
 	private String username;
 
 	@NotBlank(message = "{password.notblank}", groups = RegistrationOrInsertValid.class)
@@ -33,23 +33,24 @@ public class UtenteDTO {
 	@NotBlank(message = "{confermaPassword.notblank}", groups = RegistrationOrInsertValid.class)
 	private String confermaPassword;
 
-	@NotNull(message = "{credito.notull}")
+	@NotNull(message = "{credito.notull}", groups = UpdateValid.class)
 	private Double credito;
 
-	@NotNull(message = "{dataNascita.notnull}", groups = RegistrationOrInsertValid.class)
+	@NotNull(message = "{dataNascita.notnull}", groups = { RegistrationOrInsertValid.class, UpdateValid.class })
 	private Date dataNascita;
 
 	@NotNull(message = "{dataCreazione.notnull}")
 	private Date dataCreazione;
 
-	@NotBlank(message = "{codiceFiscale.notblank}", groups = RegistrationOrInsertValid.class)
-	@Size(max = 16, min = 16, message = "{codiceFiscale.sizeproblem}", groups = RegistrationOrInsertValid.class)
+	@NotBlank(message = "{codiceFiscale.notblank}", groups = { RegistrationOrInsertValid.class, UpdateValid.class })
+	@Size(max = 16, min = 16, message = "{codiceFiscale.sizeproblem}", groups = { RegistrationOrInsertValid.class,
+			UpdateValid.class })
 	private String codiceFiscale;
 
-	@NotNull(message = "{stato.notnull}")
+	@NotNull(message = "{stato.notnull}", groups = UpdateValid.class)
 	private StatoUtente stato;
 
-	@NotEmpty(message = "{ruoli.notempty}")
+	@NotEmpty(message = "{ruoli.notempty}", groups = UpdateValid.class)
 	private Set<RuoloDTO> ruoli = new HashSet<>(0);
 
 	private Set<AcquistoDTO> acquisti = new HashSet<>(0);
@@ -259,17 +260,15 @@ public class UtenteDTO {
 		this.stato = stato;
 	}
 
-	public UtenteDTO(@NotBlank String nome, @NotBlank String cognome, @NotBlank String username,
-			@NotBlank String password, @NotBlank String confermaPassword, @NotNull Double credito,
-			@NotNull Date dataNascita, @NotNull Date dataCreazione, @NotBlank String codiceFiscale,
-			@NotNull StatoUtente stato, @NotEmpty Set<RuoloDTO> ruoli, Set<AcquistoDTO> acquisti,
-			Set<AnnuncioDTO> annunci) {
+	public UtenteDTO(Long id, @NotBlank String nome, @NotBlank String cognome, @NotBlank String username,
+			@NotNull Double credito, @NotNull Date dataNascita, @NotNull Date dataCreazione,
+			@NotBlank String codiceFiscale, @NotNull StatoUtente stato, @NotEmpty Set<RuoloDTO> ruoli,
+			Set<AcquistoDTO> acquisti, Set<AnnuncioDTO> annunci) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.username = username;
-		this.password = password;
-		this.confermaPassword = confermaPassword;
 		this.credito = credito;
 		this.dataNascita = dataNascita;
 		this.dataCreazione = dataCreazione;
@@ -307,6 +306,7 @@ public class UtenteDTO {
 			@NotBlank String codiceFiscale, @NotNull StatoUtente stato,
 			@NotEmpty(message = "{ruoli.notempty}") Set<RuoloDTO> ruoli) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.username = username;
@@ -358,6 +358,15 @@ public class UtenteDTO {
 				utenteInstance.getUsername(), utenteInstance.getCredito(), utenteInstance.getDataNascita(),
 				utenteInstance.getDataCreazione(), utenteInstance.getCodiceFiscale(), utenteInstance.getStato(),
 				RuoloDTO.createRuoloDTOListFromModelList(utenteInstance.getRuoli()));
+	}
+
+	public static UtenteDTO createDTOFromModelForShow(Utente utenteInstance) {
+		return new UtenteDTO(utenteInstance.getId(), utenteInstance.getNome(), utenteInstance.getCognome(),
+				utenteInstance.getUsername(), utenteInstance.getCredito(), utenteInstance.getDataNascita(),
+				utenteInstance.getDataCreazione(), utenteInstance.getCodiceFiscale(), utenteInstance.getStato(),
+				RuoloDTO.createRuoloDTOListFromModelList(utenteInstance.getRuoli()),
+				AcquistoDTO.createAcquistoDTOListFromModelList(utenteInstance.getAcquisti()),
+				AnnuncioDTO.createAnnuncioDTOListFromModelList(utenteInstance.getAnnunci()));
 	}
 
 	public static List<Utente> createUtenteModelListFromDTOList(List<UtenteDTO> dtoListInput) {

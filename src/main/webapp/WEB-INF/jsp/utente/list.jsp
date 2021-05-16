@@ -66,16 +66,12 @@
 		                </tbody>
 		            </table>
 		        </div>
-		   
 			<!-- end card-body -->			   
 		    </div>
 		</div>	
-	
-	
 	<!-- end container -->	
 	</main>
 	<jsp:include page="../footer.jsp" />
-	
 	<!-- Modal -->
 	<div class="modal fade" id="confirmOperationModal" tabindex="-1" role="dialog" aria-labelledby="confirmOperationModalLabel"
 	    aria-hidden="true">
