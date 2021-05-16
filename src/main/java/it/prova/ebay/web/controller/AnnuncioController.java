@@ -1,5 +1,6 @@
 package it.prova.ebay.web.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,16 +30,16 @@ import it.prova.ebay.service.utente.UtenteService;
 @Controller
 @RequestMapping("/annuncio")
 public class AnnuncioController {
-	
+
 	@Autowired
 	private UtenteService utenteService;
-	
+
 	@Autowired
 	private AnnuncioService annuncioService;
-	
+
 	@Autowired
 	private CategoriaService categoriaService;
-	
+
 	@GetMapping
 	public ModelAndView listAllAnnunci() {
 		ModelAndView mv = new ModelAndView();
@@ -47,42 +48,48 @@ public class AnnuncioController {
 		mv.setViewName("annuncio/list");
 		return mv;
 	}
-	
+
 	@GetMapping("/search")
 	public String searchAnnuncio(Model model) {
-		model.addAttribute("list_categorie_attr", CategoriaDTO.createCategoriaDTOListFromModelList(categoriaService.listAllCategorie()));
-		model.addAttribute("list_utenti_attr", UtenteDTO.createUtenteDTOListFromModelList(utenteService.listAllUtenti()));
+		model.addAttribute("list_categorie_attr",
+				CategoriaDTO.createCategoriaDTOListFromModelList(categoriaService.listAllCategorie()));
+		model.addAttribute("list_utenti_attr",
+				UtenteDTO.createUtenteDTOListFromModelList(utenteService.listAllUtenti()));
 		return "annuncio/search";
 	}
-	
+
 	@PostMapping("/list")
 	public String listAnnunci(AnnuncioDTO annuncioExample, ModelMap model) {
 		List<Annuncio> annunci = annuncioService.findByExample(AnnuncioDTO.createModelFromDTO(annuncioExample));
 		model.addAttribute("annunci_list_attribute", annunci);
 		return "annuncio/list";
 	}
-	
+
 	@GetMapping("/insert")
 	public String createAnnuncio(Model model) {
-		model.addAttribute("insert_utente_annuncio", UtenteDTO.createUtenteDTOListFromModelList(utenteService.listAllUtenti()));
-		model.addAttribute("insert_annuncio_attr", new AnnuncioDTO());
-		model.addAttribute("insert_categoria_attr", CategoriaDTO.createCategoriaDTOListFromModelList(categoriaService.listAllCategorie()));
+		model.addAttribute("insert_utente_annuncio",
+				UtenteDTO.createUtenteDTOListFromModelList(utenteService.listAllUtenti()));
+		AnnuncioDTO annuncioDTO = new AnnuncioDTO();
+		annuncioDTO.setDataPubblicazione(new Date());
+		model.addAttribute("insert_annuncio_attr", annuncioDTO);
+		model.addAttribute("insert_categoria_attr",
+				CategoriaDTO.createCategoriaDTOListFromModelList(categoriaService.listAllCategorie()));
 		return "annuncio/insert";
 	}
 
 	@PostMapping("/save")
-	public String saveAnnuncio(@Valid @ModelAttribute("insert_annuncio_attr") AnnuncioDTO annuncioDTO, BindingResult result,
-			RedirectAttributes redirectAttrs, HttpServletRequest request, Model model) {
+	public String saveAnnuncio(@Valid @ModelAttribute("insert_annuncio_attr") AnnuncioDTO annuncioDTO,
+			BindingResult result, RedirectAttributes redirectAttrs, HttpServletRequest request, Model model) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("insert_annuncio_attr", annuncioDTO);
-			model.addAttribute("insert_utente_annuncio", UtenteDTO.createUtenteDTOListFromModelList(utenteService.listAllUtenti()));
-			model.addAttribute("insert_categoria_attr", CategoriaDTO.createCategoriaDTOListFromModelList(categoriaService.listAllCategorie()));
+			model.addAttribute("insert_utente_annuncio",
+					UtenteDTO.createUtenteDTOListFromModelList(utenteService.listAllUtenti()));
+			model.addAttribute("insert_categoria_attr",
+					CategoriaDTO.createCategoriaDTOListFromModelList(categoriaService.listAllCategorie()));
 			return "annuncio/insert";
 		}
-		Annuncio annuncioTemp = AnnuncioDTO.createModelFromDTO(annuncioDTO);
-		annuncioTemp.setUtente(annuncioDTO.getUtente());
-		annuncioService.inserisci(annuncioTemp);
+		annuncioService.inserisci(AnnuncioDTO.createModelFromDTO(annuncioDTO));
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/annuncio";
@@ -93,7 +100,7 @@ public class AnnuncioController {
 		model.addAttribute("show_annuncio_attr", annuncioService.caricaSingoloAnnuncioEager(idAnnuncio));
 		return "annuncio/show";
 	}
-	
+
 	@GetMapping("/preparaAcquisto/{idAnnuncio}")
 	public String preparaAcquisto(@PathVariable(required = true) Long idAnnuncio, Model model) {
 		model.addAttribute("show_annuncio_attr", annuncioService.caricaSingoloAnnuncioEager(idAnnuncio));

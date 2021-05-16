@@ -25,7 +25,7 @@ public class CustomUtenteRepositoryImpl implements CustomUtenteRepository {
 		Map<String, Object> parameterMap = new HashMap<>();
 
 		StringBuilder queryBuilder = new StringBuilder("select u from Utente u left join fetch u.ruoli r "
-				+ "left join fetch u.annunci a left join fech u.acquisti b where u.id = u.id");
+				+ "left join fetch u.annunci a left join fetch u.acquisti b where u.id = u.id");
 
 		if (StringUtils.isNotBlank(utenteInstance.getNome())) {
 			whereClauses.add(" u.nome = :nome ");

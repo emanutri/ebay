@@ -39,7 +39,7 @@
 		        <h5>Lista Annunci</h5> 
 		    </div>
 		    <div class='card-body'>
-		    	<a class="btn btn-primary " href="insert">Add New</a>
+		    	<a class="btn btn-primary " href="${pageContext.request.contextPath}/annuncio/insert">Add New</a>
 		    	<a href="search" class='btn btn-outline-secondary' >
 			            <i class='fa fa-chevron-left'></i> Torna alla Ricerca
 			    </a>

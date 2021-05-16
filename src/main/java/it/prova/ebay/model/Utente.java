@@ -306,4 +306,11 @@ public class Utente {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		return "Utente [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", username=" + username + "]";
+	}
+	
+	
+
 }

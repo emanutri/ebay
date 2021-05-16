@@ -69,19 +69,9 @@
 						</div>
 						
 						<div class="form-row">	
-							<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date' value='${insert_annuncio_attr.dataPubblicazione}' />
 							<div class="form-group col-md-6">
-								<label for="dataPubblicazione">Data di Pubblicazione</label>
-                        		<spring:bind path="dataPubblicazione">
-	                        		<input class="form-control ${status.error ? 'is-invalid' : ''}" id="dataPubblicazione" type="date" placeholder="dd/MM/yy"
-	                            		title="formato : gg/mm/aaaa"  name="dataPubblicazione" value="${parsedDate}" >
-	                            </spring:bind>
-                            	<form:errors  path="dataPubblicazione" cssClass="error_field" />
-							</div>
-							
-							<div class="form-group col-md-6">
-								<label for="categorie">Categorie</label>
-							    <select class="form-control" id="categoria" name="categoria">
+								<label for="${insert_categoria_attr }">Categorie</label>
+							    <select class="form-control" id="categorie" name="categorie">
 							    	<option value="" selected> -- Selezionare una voce -- </option>
 							      	<c:forEach items="${insert_categoria_attr }" var="categoriaItem">
 							      		<option value="${categoriaItem.id}" >${categoriaItem.descrizione }</option>
@@ -89,76 +79,45 @@
 							    </select>
 							</div>
 							
+							<label class ="form-check-inline" for="${insert_annuncio_attr.aperto}">Annuncio: </label>
+						 	<div class="form-check-inline">
+						 		Aperto
+	  							<input class="form-check-input" type="radio" name="aperto" id="aperto" value="${insert_annuncio_attr.aperto}true" >
+	  							Chiuso
+	  							<input class="form-check-input" type="radio" name="aperto" id="aperto" value="${insert_annuncio_attr.aperto}false" >
+  							</div>
 						</div>
 						
 						<div class="form-row">
-							<div class="form-group col-md-3" style = "padding-top: 3px;">
-								<div class="form-check-inline">
-								  <label class="form-check-label" for="annuncio.aperto">
-								    <input type="radio" class="form-check-input" name="annuncio.aperto" value="${insert_annuncio_attr.aperto}" checked="checked">Attivo
-								  </label>
-								</div>
-								<div class="form-check-inline">
-								  <label class="form-check-label" for="annuncio.aperto">
-								    <input type="radio" class="form-check-input" name="annuncio.aperto" value="${insert_annuncio_attr.aperto=='error'}">Disattivo
-								  </label>
-								</div>
-							</div>	
-							<div class="form-group col-md-6" >
-								<label for="utente">Utente</label>
+						   	<div class="form-group col-md-6">
+								<label for="${insert_utente_annuncio}">Utente</label>
 							    <select class="form-control" id="utente" name="utente">
-							    	<option value="" selected> -- Selezionare una voce -- </option>
+							    	<option value="${insert_annuncio_attr.utente.id}" selected> ${insert_annuncio_attr.utente.username}</option>
 							      	<c:forEach items="${insert_utente_annuncio }" var="utenteItem">
-							      		<option value="${utenteItem}" ${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} >${utenteItem.nome } ${utenteItem.cognome }</option>
+							      		<option value="${utenteItem.id}" ${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} >${utenteItem.nome } ${utenteItem.cognome }</option>
+	<%-- 							      	${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} --%>
 							      	</c:forEach>
 							    </select>
+						    </div>
+						    <div class="form-group col-md-6">
+									<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date' value='${insert_annuncio_attr.dataPubblicazione}' />
+<!-- 									<label>Data di Pubblicazione <span class="text-danger">*</span></label> -->
+			                    		<spring:bind path="dataPubblicazione">
+			                     			<input type="hidden" class="form-control ${status.error ? 'is-invalid' : ''}" id="dataPubblicazione" type="date" placeholder="dd/MM/yy"
+			                         		title="formato : gg/mm/aaaa"  name="dataPubblicazione" required 
+			                         		value="${parsedDate}" >
+			                        	 </spring:bind>
+			                       		<form:errors  path="dataPubblicazione" cssClass="error_field" />
 							</div>
- 						</div> 
+						</div>
 <%-- 						<input type ="hidden" name="utente" value ="${insert_annuncio_attr.utente.id}"> --%>
 						<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
 						
 					</form:form>
-					
-					<%-- FUNZIONE JQUERY UI PER AUTOCOMPLETE --%>
-					<script>
-						$("#registaSearchInput").autocomplete({
-							 source: function(request, response) {
-							        $.ajax({
-							            url: "../regista/searchRegistiAjax",
-							            datatype: "json",
-							            data: {
-							                term: request.term,   
-							            },
-							            success: function(data) {
-							                response($.map(data, function(item) {
-							                    return {
-								                    label: item.label,
-								                    value: item.value
-							                    }
-							                }))
-							            }
-							        })
-							    },
-							//quando seleziono la voce nel campo deve valorizzarsi la descrizione
-						    focus: function(event, ui) {
-						        $("#registaSearchInput").val(ui.item.label)
-						        return false
-						    },
-						    minLength: 2,
-						    //quando seleziono la voce nel campo hidden deve valorizzarsi l'id
-						    select: function( event, ui ) {
-						    	$('#registaId').val(ui.item.value);
-						    	//console.log($('#registaId').val())
-						        return false;
-						    }
-						});
-					</script>
-					<!-- end script autocomplete -->	
-					
+				</div>	
 		    
 			<!-- end card-body -->			   
 		    </div>
-		</div>	
 	
 	<!-- end container -->	
 	</main>
