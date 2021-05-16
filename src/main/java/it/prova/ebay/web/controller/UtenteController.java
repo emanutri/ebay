@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -98,6 +99,13 @@ public class UtenteController {
 		return "redirect:/utente";
 	}
 
+	@GetMapping("/edit/{idUtente}")
+	public String editUtente(@PathVariable(required = true) Long idUtente, Model model) {
+		model.addAttribute("edit_utente_attr", UtenteDTO.createDTOFromModel(utenteService.caricaSingoloUtente(idUtente)));
+		model.addAttribute("list_ruoli_attr", RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAllRuoli()));
+		return "utente/insert";
+	}
+
 	public Set<RuoloDTO> convertParamsInDTO(String[] ruoliParams) {
 		Set<RuoloDTO> ruoli = new HashSet<>(0);
 		if (ruoliParams != null) {
@@ -107,4 +115,5 @@ public class UtenteController {
 		}
 		return ruoli;
 	}
+
 }

@@ -121,7 +121,7 @@
 								    <select class="form-control" id="stato" name="stato">
 								    	<option value=""> -- Selezionare una voce -- </option>
 									      	<c:forEach items="${list_stati_attribute}" var="statoItem">
-									      		<option value="${statoItem}">${statoItem}</option>
+									      		<option value="${statoItem}" ${edit_utente_attr.stato.equals(statoItem)?'checked':'' }>${statoItem}</option>
 									      	</c:forEach>
 								    </select>	
 							</div>
