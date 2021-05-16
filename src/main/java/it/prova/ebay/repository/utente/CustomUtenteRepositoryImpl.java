@@ -28,19 +28,19 @@ public class CustomUtenteRepositoryImpl implements CustomUtenteRepository {
 				+ "left join fetch u.annunci a left join fetch u.acquisti b where u.id = u.id");
 
 		if (StringUtils.isNotBlank(utenteInstance.getNome())) {
-			whereClauses.add(" u.nome = :nome ");
+			whereClauses.add(" u.nome like :nome ");
 			parameterMap.put("nome", "%" + utenteInstance.getNome() + "%");
 		}
 		if (StringUtils.isNotBlank(utenteInstance.getCognome())) {
-			whereClauses.add(" u.cognome = :cognome ");
+			whereClauses.add(" u.cognome like :cognome ");
 			parameterMap.put("cognome", "%" + utenteInstance.getCognome() + "%");
 		}
 		if (StringUtils.isNotBlank(utenteInstance.getUsername())) {
-			whereClauses.add(" u.username = :username ");
+			whereClauses.add(" u.username like :username ");
 			parameterMap.put("username", "%" + utenteInstance.getUsername() + "%");
 		}
 		if (StringUtils.isNotBlank(utenteInstance.getCodiceFiscale())) {
-			whereClauses.add(" u.codiceFiscale = :codiceFiscale ");
+			whereClauses.add(" u.codiceFiscale like :codiceFiscale ");
 			parameterMap.put("codiceFiscale", "%" + utenteInstance.getCodiceFiscale() + "%");
 		}
 		if (utenteInstance.getDataNascita() != null) {

@@ -95,4 +95,9 @@ public class UtenteServiceImpl implements UtenteService {
 		return repository.findByCognomeIgnoreCaseContainingAndNomeIgnoreCaseContainingAndRuoli(cognome, nome, ruolo);
 	}
 
+	@Transactional(readOnly = true)
+	public Utente caricaSingoloUtenteEager(Long id) {
+		return repository.findByIdEager(id).orElse(null);
+	}
+
 }

@@ -1,6 +1,6 @@
 package it.prova.ebay.dto;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -69,7 +69,7 @@ public class RuoloDTO {
 		return dtoListInput.stream().map(ruoloEntity -> createModelFromDTO(ruoloEntity)).collect(Collectors.toSet());
 	}
 
-	public static Set<RuoloDTO> createRuoloDTOListFromModelList(List<Ruolo> modelListInput) {
+	public static Set<RuoloDTO> createRuoloDTOListFromModelList(Collection<Ruolo> modelListInput) {
 		return modelListInput.stream().map(ruoloEntity -> createDTOFromModel(ruoloEntity)).collect(Collectors.toSet());
 	}
 

@@ -24,5 +24,7 @@ public interface UtenteService {
 	public void invertUserAbilitation(Long utenteInstanceId);
 
 	public List<Utente> findByCognomeNomeRuolo(String cognome, String nome, Ruolo ruolo);
+	
+	public Utente caricaSingoloUtenteEager(Long id);
 
 }

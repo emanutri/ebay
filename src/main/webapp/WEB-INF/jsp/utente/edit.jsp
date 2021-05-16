@@ -6,7 +6,7 @@
 <html lang="it">
 	<head>
 		<jsp:include page="../header.jsp" />
-		<title>Inserisci nuovo</title>
+		<title>Modifica utente</title>
 		
 		<!-- style per le pagine diverse dalla index -->
 	    <link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
@@ -41,14 +41,11 @@
 			
 			<div class='card'>
 			    <div class='card-header'>
-			        <h5>Inserisci nuovo utente</h5> 
+			        <h5>Modifica utente utente</h5> 
 			    </div>
+				<form:form modelAttribute="edit_utente_attr" method="post" action="update" novalidate="novalidate" >
 			    <div class='card-body'>
-			    
 			    		<h6 class="card-title">I campi con <span class="text-danger">*</span> sono obbligatori</h6>
-	
-						<form:form modelAttribute="edit_utente_attr" method="post" action="modify" novalidate="novalidate" >
-						
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label>Nome <span class="text-danger">*</span></label>
@@ -77,24 +74,6 @@
 								</div>
 
 								<div class="form-group col-md-6">
-									<label>Password <span class="text-danger">*</span></label>
-									<spring:bind path="password">
-										<input type="password" class="form-control ${status.error ? 'is-invalid' : ''}" autocomplete="new-password" name="password" id="password" placeholder="Inserire password" value="${edit_utente_attr.password }" required>
-									</spring:bind>
-									<form:errors path="password" cssClass="error_field" />
-								</div>
-							</div>
-							
-							<div class="form-row">
-						        <div class="form-group col-md-6">
-									<label>Conferma Password <span class="text-danger">*</span></label>
-											<spring:bind path="confermaPassword">
-												<input type="password" class="form-control ${status.error ? 'is-invalid' : ''}" autocomplete="new-password" name="confermaPassword" id="confermaPassword" placeholder="Inserire conferma password" value="${edit_utente_attr.password }" required>
-											</spring:bind>
-											<form:errors path="confermaPassword" cssClass="error_field" />
-								</div>
-					
-								<div class="form-group col-md-6">
 									<label>Codice Fiscale <span class="text-danger">*</span></label>
 									<spring:bind path="codiceFiscale">
 										<input type="text" name="codiceFiscale" id="codiceFiscale" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il codice fiscale" value="${edit_utente_attr.codiceFiscale }" required>
@@ -114,32 +93,52 @@
 			                        	 </spring:bind>
 			                       		<form:errors  path="dataNascita" cssClass="error_field" />
 							</div>
-						</div>
-			       		<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="stato">Stato</label>
-								    <select class="form-control" id="stato" name="stato">
-								    	<option value=""> -- Selezionare una voce -- </option>
-									      	<c:forEach items="${list_stati_attribute}" var="statoItem">
-									      		<option value="${statoItem}" ${edit_utente_attr.stato.equals(statoItem)?'checked':'' }>${statoItem}</option>
-									      	</c:forEach>
-								    </select>	
-							</div>
 							<div class="form-group col-md-6">	
-								<label for="roles">Ruoli:</label>
+								<label for="ruoli">Ruoli <span class="text-danger">*</span></label>
 									<div class="form-check">
-									<c:forEach items="${list_ruoli_attr}" var="ruoloItem">
-									  	<input name="roles" class="form-check-input" type="checkbox" value="${ruoloItem.id}" id="defaultCheck${ruoloItem.id}"
-									  	${edit_utente_attr.ruoli.contains(ruoloItem)?'checked':'' }>
-								  		<label class="form-check-label" for="defaultCheck${ruoloItem.id}">${ruoloItem.descrizione}</label>
-									<br/>
-									</c:forEach>
+		          		          		<spring:bind path="ruoli">
+											<c:forEach items="${list_ruoli_attr}" var="ruoloItem">
+											  	<input name="ruoli" class="form-check-input" type="checkbox" value="${ruoloItem.id}" id="defaultCheck${ruoloItem.id}"
+											  	${edit_utente_attr.ruoli.contains(ruoloItem)?'checked':'' }>
+										  		<label class="form-check-label" for="defaultCheck${ruoloItem.id}">${ruoloItem.descrizione}</label>
+											<br/>
+											</c:forEach>
+										</spring:bind>
+						           		<form:errors  path="ruoli" cssClass="error_field" />
 									</div>
 							</div>
 						</div>
-						<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
-					</form:form>
+			       		<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="stato">Stato <span class="text-danger">*</span></label>
+	          		          		<spring:bind path="stato">
+								    <select class="form-control" id="stato" name="stato">
+								    	<option value=""> -- Selezionare una voce -- </option>
+									      	<c:forEach items="${list_stati_attribute}" var="statoItem">
+									      		<option value="${statoItem}" ${edit_utente_attr.stato==statoItem?'selected':'' }>${statoItem}</option>
+									      	</c:forEach>
+								    </select>	
+									</spring:bind>
+					           		<form:errors  path="stato" cssClass="error_field" />
+							</div>
+							<div class="form-group col-md-6">
+								<label>Credito <span class="text-danger">*</span></label>
+								<spring:bind path="credito">
+									<input type="number" name="credito" id="credito" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il credito" value="${edit_utente_attr.credito }" required>
+								</spring:bind>
+								<form:errors  path="credito" cssClass="error_field" />
+							</div>
+						</div>
+
 			    </div>
+			    <div class='card-footer'>
+						<a href="${pageContext.request.contextPath }/utente/" class='btn btn-outline-secondary' style='width:80px'>
+		            		<i class='fa fa-chevron-left'></i> Back
+		        		</a>
+		        		<input type = "hidden" name = "id" value = "${edit_utente_attr.id }" />
+						<button type="submit" name="submit" value="submit" id="submit" class="btn btn-outline-primary">Modifica</button>
+		    </div>
+		  	</form:form>
 			</div>
 		
 		

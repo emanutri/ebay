@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.prova.ebay.dto.AnnuncioDTO;
-import it.prova.ebay.dto.RegistrationValid;
+import it.prova.ebay.dto.RegistrationOrInsertValid;
 import it.prova.ebay.dto.RuoloDTO;
 import it.prova.ebay.dto.UtenteDTO;
 import it.prova.ebay.model.StatoUtente;
@@ -79,19 +79,22 @@ public class UtenteController {
 	public String insertUtente(Model model) {
 		model.addAttribute("insert_utente_attr", new UtenteDTO());
 		model.addAttribute("list_ruoli_attr", RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAllRuoli()));
+		model.addAttribute("list_stati_attribute", StatoUtente.values());
 		return "utente/insert";
 	}
 
 	@PostMapping("/save")
 	public String saveUtente(
-			@Validated(RegistrationValid.class) @ModelAttribute("insert_utente_attr") UtenteDTO utenteDTO,
-			BindingResult result, RedirectAttributes redirectAttrs) {
+			@Validated(RegistrationOrInsertValid.class) @ModelAttribute("insert_utente_attr") UtenteDTO utenteDTO,
+			BindingResult result, RedirectAttributes redirectAttrs, Model model) {
 
 		if (!utenteDTO.validatePassword()) {
 			result.rejectValue("confermaPassword", "confermaPassword.notequals");
 		}
 
 		if (result.hasErrors()) {
+			model.addAttribute("list_ruoli_attr", RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAllRuoli()));
+			model.addAttribute("list_stati_attribute", StatoUtente.values());
 			return "utente/insert";
 		}
 		utenteService.inserisci(utenteDTO.buildUtenteModel());
@@ -101,9 +104,26 @@ public class UtenteController {
 
 	@GetMapping("/edit/{idUtente}")
 	public String editUtente(@PathVariable(required = true) Long idUtente, Model model) {
-		model.addAttribute("edit_utente_attr", UtenteDTO.createDTOFromModel(utenteService.caricaSingoloUtente(idUtente)));
+		model.addAttribute("edit_utente_attr", UtenteDTO.createDTOFromModelForEdit(utenteService.caricaSingoloUtenteEager(idUtente)));
+		model.addAttribute("list_stati_attribute", StatoUtente.values());
 		model.addAttribute("list_ruoli_attr", RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAllRuoli()));
-		return "utente/insert";
+		return "utente/edit";
+	}
+	
+	@PostMapping("/edit/update")
+	public String updateUtente(
+			@Validated(RegistrationOrInsertValid.class) @ModelAttribute("edit_utente_attr") UtenteDTO utenteDTO,
+			BindingResult result, RedirectAttributes redirectAttrs, Model model) {
+
+		if (result.hasErrors()) {
+			model.addAttribute("list_ruoli_attr", RuoloDTO.createRuoloDTOListFromModelList(ruoloService.listAllRuoli()));
+			model.addAttribute("list_stati_attribute", StatoUtente.values());
+			return "utente/edit";
+		}
+
+		utenteService.aggiorna(utenteDTO.buildUtenteModel());
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/utente";
 	}
 
 	public Set<RuoloDTO> convertParamsInDTO(String[] ruoliParams) {

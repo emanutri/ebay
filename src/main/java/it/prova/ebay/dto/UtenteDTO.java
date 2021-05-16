@@ -18,32 +18,32 @@ public class UtenteDTO {
 
 	private Long id;
 
-	@NotBlank(message = "{nome.notblank}", groups = RegistrationValid.class)
+	@NotBlank(message = "{nome.notblank}", groups = RegistrationOrInsertValid.class)
 	private String nome;
 
-	@NotBlank(message = "{cognome.notblank}", groups = RegistrationValid.class)
+	@NotBlank(message = "{cognome.notblank}", groups = RegistrationOrInsertValid.class)
 	private String cognome;
 
-	@NotBlank(message = "{username.notblank}", groups = RegistrationValid.class)
+	@NotBlank(message = "{username.notblank}", groups = RegistrationOrInsertValid.class)
 	private String username;
 
-	@NotBlank(message = "{password.notblank}", groups = RegistrationValid.class)
+	@NotBlank(message = "{password.notblank}", groups = RegistrationOrInsertValid.class)
 	private String password;
 
-	@NotBlank(message = "{confermaPassword.notblank}", groups = RegistrationValid.class)
+	@NotBlank(message = "{confermaPassword.notblank}", groups = RegistrationOrInsertValid.class)
 	private String confermaPassword;
 
 	@NotNull(message = "{credito.notull}")
 	private Double credito;
 
-	@NotNull(message = "{dataNascita.notnull}", groups = RegistrationValid.class)
+	@NotNull(message = "{dataNascita.notnull}", groups = RegistrationOrInsertValid.class)
 	private Date dataNascita;
 
 	@NotNull(message = "{dataCreazione.notnull}")
 	private Date dataCreazione;
 
-	@NotBlank(message = "{codiceFiscale.notblank}", groups = RegistrationValid.class)
-	@Size(max = 16, min = 16, message = "{codiceFiscale.sizeproblem}", groups = RegistrationValid.class)
+	@NotBlank(message = "{codiceFiscale.notblank}", groups = RegistrationOrInsertValid.class)
+	@Size(max = 16, min = 16, message = "{codiceFiscale.sizeproblem}", groups = RegistrationOrInsertValid.class)
 	private String codiceFiscale;
 
 	@NotNull(message = "{stato.notnull}")
@@ -302,6 +302,23 @@ public class UtenteDTO {
 
 	}
 
+	public UtenteDTO(Long id, @NotBlank String nome, @NotBlank String cognome, @NotBlank String username,
+			@NotNull Double credito, @NotNull Date dataNascita, @NotNull Date dataCreazione,
+			@NotBlank String codiceFiscale, @NotNull StatoUtente stato,
+			@NotEmpty(message = "{ruoli.notempty}") Set<RuoloDTO> ruoli) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.username = username;
+		this.credito = credito;
+		this.dataNascita = dataNascita;
+		this.dataCreazione = dataCreazione;
+		this.codiceFiscale = codiceFiscale;
+		this.stato = stato;
+		this.ruoli = ruoli;
+
+	}
+
 	public Utente buildUtenteModel() {
 		return new Utente(this.nome, this.cognome, this.username, this.password, this.dataNascita, this.dataCreazione,
 				this.codiceFiscale, this.credito, this.stato, RuoloDTO.createRuoloModelListFromDTOList(this.ruoli));
@@ -334,6 +351,13 @@ public class UtenteDTO {
 	public static UtenteDTO createDTOFromModel(Utente utenteInstance) {
 		return new UtenteDTO(utenteInstance.getId(), utenteInstance.getNome(), utenteInstance.getCognome(),
 				utenteInstance.getUsername(), utenteInstance.getDataCreazione(), utenteInstance.getStato());
+	}
+
+	public static UtenteDTO createDTOFromModelForEdit(Utente utenteInstance) {
+		return new UtenteDTO(utenteInstance.getId(), utenteInstance.getNome(), utenteInstance.getCognome(),
+				utenteInstance.getUsername(), utenteInstance.getCredito(), utenteInstance.getDataNascita(),
+				utenteInstance.getDataCreazione(), utenteInstance.getCodiceFiscale(), utenteInstance.getStato(),
+				RuoloDTO.createRuoloDTOListFromModelList(utenteInstance.getRuoli()));
 	}
 
 	public static List<Utente> createUtenteModelListFromDTOList(List<UtenteDTO> dtoListInput) {

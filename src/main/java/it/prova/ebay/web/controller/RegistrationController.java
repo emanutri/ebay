@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import it.prova.ebay.dto.RegistrationValid;
+import it.prova.ebay.dto.RegistrationOrInsertValid;
 import it.prova.ebay.dto.UtenteDTO;
 import it.prova.ebay.service.utente.UtenteService;
 
@@ -29,7 +29,7 @@ public class RegistrationController {
 	}
 
 	@PostMapping("/save")
-	public String saveUtente(@Validated(RegistrationValid.class) @ModelAttribute("registra_utente_attr") UtenteDTO utenteDTO, BindingResult result,
+	public String saveUtente(@Validated(RegistrationOrInsertValid.class) @ModelAttribute("registra_utente_attr") UtenteDTO utenteDTO, BindingResult result,
 			RedirectAttributes redirectAttrs) {
 
 		if(!utenteDTO.validatePassword()) {
