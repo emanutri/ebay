@@ -84,6 +84,16 @@ public class Annuncio {
 		this.utente = utente;
 	}
 
+	public Annuncio(Long id, Boolean aperto, String testoAnnuncio, Double prezzo, Date dataPubblicazione,
+			Set<Categoria> categorie) {
+		this.id = id;
+		this.aperto = aperto;
+		this.testoAnnuncio = testoAnnuncio;
+		this.prezzo = prezzo;
+		this.dataPubblicazione = dataPubblicazione;
+		this.categorie = categorie;
+	}
+
 	public Long getId() {
 		return id;
 	}

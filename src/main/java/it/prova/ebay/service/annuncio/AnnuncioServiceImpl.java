@@ -8,15 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.ebay.model.Annuncio;
 import it.prova.ebay.repository.annuncio.AnnuncioRepository;
-import it.prova.ebay.service.categoria.CategoriaService;
 
 @Service
 public class AnnuncioServiceImpl implements AnnuncioService {
 
 	@Autowired
 	private AnnuncioRepository repository;
-	@Autowired
-	private CategoriaService categoriaService;
 
 	@Transactional(readOnly = true)
 	public List<Annuncio> listAllAnnunci() {
@@ -41,7 +38,6 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 
 	@Transactional
 	public void inserisci(Annuncio annuncioInstance) {
-//		categoriaService.caricaSingoloCategoria(annuncioInstance.getId());
 		repository.save(annuncioInstance);
 
 	}

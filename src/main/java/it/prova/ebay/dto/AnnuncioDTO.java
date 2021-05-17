@@ -114,7 +114,8 @@ public class AnnuncioDTO {
 	}
 
 	public Annuncio buildAnnuncioModel() {
-		return new Annuncio(this.id, this.aperto, this.testoAnnuncio, this.prezzo, this.dataPubblicazione, this.utente.buildUtenteModel());
+		return new Annuncio(this.id, this.aperto, this.testoAnnuncio, this.prezzo, this.dataPubblicazione,
+				this.utente.buildUtenteModel());
 	}
 
 	public static AnnuncioDTO createAnnuncioDTOInstanceFromParams(Long id, Boolean aperto, String testoAnnuncio,
@@ -127,7 +128,14 @@ public class AnnuncioDTO {
 
 	public static Annuncio createModelFromDTO(AnnuncioDTO annuncioInstance) {
 		return new Annuncio(annuncioInstance.getId(), annuncioInstance.getAperto(), annuncioInstance.getTestoAnnuncio(),
-				annuncioInstance.getPrezzo(), annuncioInstance.getDataPubblicazione(), annuncioInstance.getUtente().buildUtenteModel(),
+				annuncioInstance.getPrezzo(), annuncioInstance.getDataPubblicazione(),
+				annuncioInstance.getUtente().buildUtenteModel(),
+				CategoriaDTO.createCategoriaModelListFromDTOList(annuncioInstance.getCategorie()));
+	}
+
+	public static Annuncio createModelFromDTOForSearch(AnnuncioDTO annuncioInstance) {
+		return new Annuncio(annuncioInstance.getId(), annuncioInstance.getAperto(), annuncioInstance.getTestoAnnuncio(),
+				annuncioInstance.getPrezzo(), annuncioInstance.getDataPubblicazione(),
 				CategoriaDTO.createCategoriaModelListFromDTOList(annuncioInstance.getCategorie()));
 	}
 
