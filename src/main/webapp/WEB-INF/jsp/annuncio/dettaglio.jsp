@@ -83,7 +83,7 @@
 		    
 		    <div class='card-footer'>
 			    <a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath }/annuncio/riepilogo/${show_annuncio_attr.id }">Buy</a>
-				<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath }/acquisto/servletControlloAcquisto/${show_annuncio_attr.id }">Compra Ora</a>
+				<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath }/acquisto/compra/${show_annuncio_attr.id }">Compra Ora</a>
 		        <a href="${pageContext.request.contextPath }/annuncio/" class='btn btn-outline-secondary' style='width:80px'>
 		            <i class='fa fa-chevron-left danger'></i> Back
 		        </a>

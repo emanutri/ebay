@@ -10,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import it.prova.ebay.model.Acquisto;
-import it.prova.ebay.model.Utente;
 
 public class AcquistoDTO {
 
@@ -26,7 +25,7 @@ public class AcquistoDTO {
 	private Date anno;
 
 	@NotNull(message = "{utente.notnull}")
-	private Utente utente;
+	private UtenteDTO utente;
 
 	public AcquistoDTO() {
 	}
@@ -41,7 +40,7 @@ public class AcquistoDTO {
 
 	public AcquistoDTO(Long id, @NotBlank(message = "{descrizione.notblank}") String descrizione,
 			@NotNull(message = "{prezzo.notnull}") Double prezzo, @NotNull(message = "{anno.notnull}") Date anno,
-			@NotNull(message = "{utente.notnull}") Utente utente) {
+			@NotNull(message = "{utente.notnull}") UtenteDTO utente) {
 		super();
 		this.id = id;
 		this.descrizione = descrizione;
@@ -91,31 +90,33 @@ public class AcquistoDTO {
 		this.anno = anno;
 	}
 
-	public Utente getUtente() {
+	public UtenteDTO getUtente() {
 		return utente;
 	}
 
-	public void setUtente(Utente utente) {
+	public void setUtente(UtenteDTO utente) {
 		this.utente = utente;
 	}
-	
+
 	public Acquisto buildAcquistoModel() {
-		return new Acquisto(this.descrizione, this.anno ,this.prezzo);
+		return new Acquisto(this.descrizione, this.anno, this.prezzo);
 	}
 
 	public static AcquistoDTO createAcquistoDTOInstanceFromParams(String descrizione, Date anno, Double prezzo) {
 
-		AcquistoDTO result = new AcquistoDTO(descrizione,prezzo,anno);
+		AcquistoDTO result = new AcquistoDTO(descrizione, prezzo, anno);
 
 		return result;
 	}
 
 	public static Acquisto createModelFromDTO(AcquistoDTO acquistoInstance) {
-		return new Acquisto(acquistoInstance.getDescrizione(), acquistoInstance.getAnno(), acquistoInstance.getPrezzo());
+		return new Acquisto(acquistoInstance.getDescrizione(), acquistoInstance.getAnno(),
+				acquistoInstance.getPrezzo());
 	}
 
 	public static AcquistoDTO createDTOFromModel(Acquisto acquistoInstance) {
-		return new AcquistoDTO(acquistoInstance.getDescrizione(), acquistoInstance.getPrezzo(), acquistoInstance.getAnno());
+		return new AcquistoDTO(acquistoInstance.getDescrizione(), acquistoInstance.getPrezzo(),
+				acquistoInstance.getAnno());
 	}
 
 	public static List<Acquisto> createAcquistoModelListFromDTOList(List<AcquistoDTO> dtoListInput) {
@@ -126,6 +127,5 @@ public class AcquistoDTO {
 		return modelListInput.stream().map(utenteEntity -> createDTOFromModel(utenteEntity))
 				.collect(Collectors.toSet());
 	}
-
 
 }

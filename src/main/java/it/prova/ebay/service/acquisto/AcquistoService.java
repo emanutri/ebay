@@ -7,7 +7,7 @@ import it.prova.ebay.model.Utente;
 
 public interface AcquistoService {
 
-	public List<Acquisto> listAllUtenti();
+	public List<Acquisto> listAllAcquisti();
 
 	public Acquisto caricaSingoloUtente(Long id);
 

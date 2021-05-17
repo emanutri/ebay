@@ -17,7 +17,7 @@ public class AcquistoServiceImpl implements AcquistoService {
 	private AcquistoRepository repository;
 
 	@Transactional(readOnly = true)
-	public List<Acquisto> listAllUtenti() {
+	public List<Acquisto> listAllAcquisti() {
 		return (List<Acquisto>) repository.findAll();
 	}
 
