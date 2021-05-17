@@ -1,16 +1,17 @@
 package it.prova.ebay.web.controller;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import it.prova.ebay.dto.UtenteDTO;
 import it.prova.ebay.service.annuncio.AnnuncioService;
 import it.prova.ebay.service.categoria.CategoriaService;
 import it.prova.ebay.service.utente.UtenteService;
+import it.prova.ebay.validate.InsertAnnuncioValid;
 
 @Controller
 @RequestMapping("/annuncio")
@@ -67,11 +69,12 @@ public class AnnuncioController {
 	}
 
 	@GetMapping("/insert")
-	public String createAnnuncio(Model model) {
-		model.addAttribute("insert_utente_annuncio",
-				UtenteDTO.createUtenteDTOListFromModelList(utenteService.listAllUtenti()));
+	public String createAnnuncio(Model model, Principal principal) {
+//		model.addAttribute("insert_utente_annuncio",
+//				UtenteDTO.createUtenteDTOListFromModelList(utenteService.listAllUtenti()));
 		AnnuncioDTO annuncioDTO = new AnnuncioDTO();
 		annuncioDTO.setDataPubblicazione(new Date());
+		annuncioDTO.setUtente(UtenteDTO.createDTOFromModel(utenteService.findByUserName(principal.getName())));
 		model.addAttribute("insert_annuncio_attr", annuncioDTO);
 		model.addAttribute("insert_categoria_attr",
 				CategoriaDTO.createCategoriaDTOListFromModelList(categoriaService.listAllCategorie()));
@@ -79,7 +82,7 @@ public class AnnuncioController {
 	}
 
 	@PostMapping("/save")
-	public String saveAnnuncio(@Valid @ModelAttribute("insert_annuncio_attr") AnnuncioDTO annuncioDTO,
+	public String saveAnnuncio(@Validated(InsertAnnuncioValid.class) @ModelAttribute("insert_annuncio_attr") AnnuncioDTO annuncioDTO,
 			BindingResult result, RedirectAttributes redirectAttrs, HttpServletRequest request, Model model) {
 
 		if (result.hasErrors()) {

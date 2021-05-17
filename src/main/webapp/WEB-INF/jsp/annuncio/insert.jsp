@@ -89,16 +89,16 @@
 						</div>
 						
 						<div class="form-row">
-						   	<div class="form-group col-md-6">
-								<label for="${insert_utente_annuncio}">Utente</label>
-							    <select class="form-control" id="utente" name="utente">
-							    	<option value="${insert_annuncio_attr.utente.id}" selected> ${insert_annuncio_attr.utente.username}</option>
-							      	<c:forEach items="${insert_utente_annuncio }" var="utenteItem">
-							      		<option value="${utenteItem.id}" ${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} >${utenteItem.nome } ${utenteItem.cognome }</option>
-	<%-- 							      	${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} --%>
-							      	</c:forEach>
-							    </select>
-						    </div>
+<!-- 						   	<div class="form-group col-md-6"> -->
+<%-- 								<label for="${insert_utente_annuncio}">Utente</label> --%>
+<!-- 							    <select class="form-control" id="utente" name="utente"> -->
+<%-- 							    	<option value="${insert_annuncio_attr.utente.id}" selected> ${insert_annuncio_attr.utente.username}</option> --%>
+<%-- 							      	<c:forEach items="${insert_utente_annuncio }" var="utenteItem"> --%>
+<%-- 							      		<option value="${utenteItem.id}" ${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} >${utenteItem.nome } ${utenteItem.cognome }</option> --%>
+<%-- 								      	${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} --%>
+<%-- 							      	</c:forEach> --%>
+<!-- 							    </select> -->
+<!-- 						    </div> -->
 						    <div class="form-group col-md-6">
 									<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date' value='${insert_annuncio_attr.dataPubblicazione}' />
 <!-- 									<label>Data di Pubblicazione <span class="text-danger">*</span></label> -->

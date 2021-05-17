@@ -32,7 +32,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	 http.authorizeRequests()
-    	 .antMatchers("/","/home").permitAll()
+    	 .antMatchers("/","/home").permitAll()//da inserire la search di annunci
          .antMatchers("/assets/**").permitAll()
          .antMatchers("/login", "/registration/**" ,"/search").permitAll()
          .antMatchers("/utente/**").hasRole("ADMIN")

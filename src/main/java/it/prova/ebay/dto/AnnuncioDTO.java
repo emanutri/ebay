@@ -11,18 +11,19 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import it.prova.ebay.model.Annuncio;
+import it.prova.ebay.validate.InsertAnnuncioValid;
 
 public class AnnuncioDTO {
 
 	private Long id;
 
-	@NotNull(message = "{aperto.notnull}")
+	@NotNull(message = "{aperto.notnull}", groups = InsertAnnuncioValid.class)
 	private Boolean aperto;
 
-	@NotBlank(message = "{testoAnnuncio.notblank}")
+	@NotBlank(message = "{testoAnnuncio.notblank}", groups = InsertAnnuncioValid.class)
 	private String testoAnnuncio;
 
-	@NotNull(message = "{prezzo.notnull}")
+	@NotNull(message = "{prezzo.notnull}", groups = InsertAnnuncioValid.class)
 	private Double prezzo;
 
 	@NotNull(message = "{dataPubblicazione.notnull}")
