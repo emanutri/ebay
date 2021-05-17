@@ -1,7 +1,7 @@
 package it.prova.ebay.dto;
 
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -96,16 +96,16 @@ public class CategoriaDTO {
 	}
 
 	public static CategoriaDTO createDTOFromModel(Categoria categoriaInstance) {
-		return new CategoriaDTO(categoriaInstance.getDescrizione(), categoriaInstance.getCodice());
+		return new CategoriaDTO(categoriaInstance.getId(),categoriaInstance.getDescrizione(), categoriaInstance.getCodice());
 	}
 
-	public static List<Categoria> createCategoriaModelListFromDTOList(List<CategoriaDTO> dtoListInput) {
-		return dtoListInput.stream().map(utenteEntity -> createModelFromDTO(utenteEntity)).collect(Collectors.toList());
+	public static Set<Categoria> createCategoriaModelListFromDTOList(Set<CategoriaDTO> dtoListInput) {
+		return dtoListInput.stream().map(utenteEntity -> createModelFromDTO(utenteEntity)).collect(Collectors.toSet());
 	}
 
-	public static List<CategoriaDTO> createCategoriaDTOListFromModelList(List<Categoria> modelListInput) {
+	public static Set<CategoriaDTO> createCategoriaDTOListFromModelList(Collection<Categoria> modelListInput) {
 		return modelListInput.stream().map(utenteEntity -> createDTOFromModel(utenteEntity))
-				.collect(Collectors.toList());
+				.collect(Collectors.toSet());
 	}
 
 

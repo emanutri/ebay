@@ -44,7 +44,7 @@
 							<label for="categorie">Categorie:</label>
 								<div class="form-check">
 								<c:forEach items="${list_categorie_attr}" var="categorieItem">
-								  	<input name="categorie" class="form-check-input" type="checkbox" value="${categorieItem.id}" >
+								  	<input name="categorie" class="form-check-input" type="checkbox" id = "defaultCheck${categorieItem.id}" value="${categorieItem.id}" >
 							  		<label class="form-check-label" for="defaultCheck${categorieItem.id}">${categorieItem.descrizione}</label>
 								<br/>
 								</c:forEach>

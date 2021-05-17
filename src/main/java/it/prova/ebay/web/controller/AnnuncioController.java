@@ -1,7 +1,7 @@
 package it.prova.ebay.web.controller;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import it.prova.ebay.dto.AnnuncioDTO;
 import it.prova.ebay.dto.CategoriaDTO;
 import it.prova.ebay.dto.UtenteDTO;
-import it.prova.ebay.model.Annuncio;
 import it.prova.ebay.service.annuncio.AnnuncioService;
 import it.prova.ebay.service.categoria.CategoriaService;
 import it.prova.ebay.service.utente.UtenteService;
@@ -43,7 +42,7 @@ public class AnnuncioController {
 	@GetMapping
 	public ModelAndView listAllAnnunci() {
 		ModelAndView mv = new ModelAndView();
-		List<AnnuncioDTO> annunciDTO = AnnuncioDTO.createAnnuncioDTOListFromModelList(annuncioService.listAllAnnunci());
+		Set<AnnuncioDTO> annunciDTO = AnnuncioDTO.createAnnuncioDTOListFromModelList(annuncioService.listAllAnnunci());
 		mv.addObject("annunci_list_attribute", annunciDTO);
 		mv.setViewName("annuncio/list");
 		return mv;
@@ -60,8 +59,10 @@ public class AnnuncioController {
 
 	@PostMapping("/list")
 	public String listAnnunci(AnnuncioDTO annuncioExample, ModelMap model) {
-		List<Annuncio> annunci = annuncioService.findByExample(AnnuncioDTO.createModelFromDTO(annuncioExample));
-		model.addAttribute("annunci_list_attribute", annunci);
+		System.out.println(annuncioExample.getCategorie());
+		Set<AnnuncioDTO> annunciDTO = AnnuncioDTO.createAnnuncioDTOListFromModelList(
+				annuncioService.findByExample(AnnuncioDTO.createModelFromDTO(annuncioExample)));
+		model.addAttribute("annunci_list_attribute", annunciDTO);
 		return "annuncio/list";
 	}
 

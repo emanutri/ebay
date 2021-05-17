@@ -27,12 +27,6 @@
 		    <span aria-hidden="true">&times;</span>
 		  </button>
 		</div>
-		<div class="alert alert-info alert-dismissible fade show d-none" role="alert">
-		  Aggiungere d-none nelle class per non far apparire
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		    <span aria-hidden="true">&times;</span>
-		  </button>
-		</div>
 		
 		<div class='card'>
 		    <div class='card-header'>
@@ -64,8 +58,13 @@
 									<td>${annuncioItem.prezzo }</td>
 									<td>${annuncioItem.dataPubblicazione }</td>
 									<td>${annuncioItem.utente.nome } ${annuncioItem.utente.cognome }</td>
-									<td>${annuncioItem.categorie }</td>
-									<td>${annuncioItem.aperto }</td>
+									<td>
+									<c:forEach var = "categoriaItem" items = "${annuncioItem.categorie }" > 
+										${categoriaItem.descrizione }
+										<br>
+									</c:forEach>
+									</td>
+									<td>${annuncioItem.aperto?'Aperto':'Chiuso' }</td>
 									<td>
 										<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath }/annuncio/show/${annuncioItem.id }">Dettaglio</a>
 										<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath }/annuncio/preparaAcquisto/${annuncioItem.id }">Compra</a>

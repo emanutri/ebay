@@ -46,8 +46,10 @@ public class CustomAnnuncioRepositoryImpl implements CustomAnnuncioRepository {
 			whereClauses.add(" u = :utente ");
 			parameterMap.put("utente", annuncioExample.getUtente());
 		}
+		System.out.println(annuncioExample.getCategorie());
 		if (annuncioExample.getCategorie() != null && !annuncioExample.getCategorie().isEmpty()) {
-			whereClauses.add(" a.categorie = :categorie ");
+			System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+			whereClauses.add(" c = :categorie ");
 			parameterMap.put("categorie", annuncioExample.getCategorie());
 		}
 
@@ -58,7 +60,6 @@ public class CustomAnnuncioRepositoryImpl implements CustomAnnuncioRepository {
 		for (String key : parameterMap.keySet()) {
 			typedQuery.setParameter(key, parameterMap.get(key));
 		}
-
 		return typedQuery.getResultList();
 	}
 

@@ -11,8 +11,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import it.prova.ebay.model.Annuncio;
-import it.prova.ebay.model.Categoria;
-import it.prova.ebay.model.Utente;
 
 public class AnnuncioDTO {
 
@@ -31,31 +29,32 @@ public class AnnuncioDTO {
 	private Date dataPubblicazione;
 
 	@NotNull(message = "{utente.notnull}")
-	private Utente utente;
+	private UtenteDTO utente;
 
-	private Set<Categoria> categorie = new HashSet<Categoria>(0);
+	private Set<CategoriaDTO> categorie = new HashSet<CategoriaDTO>(0);
 
 	public AnnuncioDTO() {
 	}
 
-	public AnnuncioDTO(Long id, Boolean aperto, String testoAnnuncio, Double prezzo, Date dataPubblicazione, Utente utente) {
-		this.id=id;
-		this.aperto=aperto;
-		this.testoAnnuncio=testoAnnuncio;
-		this.prezzo=prezzo;
-		this.dataPubblicazione=dataPubblicazione;
-		this.utente=utente;
+	public AnnuncioDTO(Long id, Boolean aperto, String testoAnnuncio, Double prezzo, Date dataPubblicazione,
+			UtenteDTO utente) {
+		this.id = id;
+		this.aperto = aperto;
+		this.testoAnnuncio = testoAnnuncio;
+		this.prezzo = prezzo;
+		this.dataPubblicazione = dataPubblicazione;
+		this.utente = utente;
 	}
 
 	public AnnuncioDTO(Long id, Boolean aperto, String testoAnnuncio, Double prezzo, Date dataPubblicazione,
-			Utente utente, Set<Categoria> categorie) {
-		this.id=id;
-		this.aperto=aperto;
-		this.testoAnnuncio=testoAnnuncio;
-		this.prezzo=prezzo;
-		this.dataPubblicazione=dataPubblicazione;
-		this.utente=utente;
-		this.categorie=categorie;
+			UtenteDTO utente, Set<CategoriaDTO> categorie) {
+		this.id = id;
+		this.aperto = aperto;
+		this.testoAnnuncio = testoAnnuncio;
+		this.prezzo = prezzo;
+		this.dataPubblicazione = dataPubblicazione;
+		this.utente = utente;
+		this.categorie = categorie;
 	}
 
 	public Long getId() {
@@ -98,44 +97,47 @@ public class AnnuncioDTO {
 		this.dataPubblicazione = dataPubblicazione;
 	}
 
-	public Utente getUtente() {
+	public UtenteDTO getUtente() {
 		return utente;
 	}
 
-	public void setUtente(Utente utente) {
+	public void setUtente(UtenteDTO utente) {
 		this.utente = utente;
 	}
 
-	public Set<Categoria> getCategorie() {
+	public Set<CategoriaDTO> getCategorie() {
 		return categorie;
 	}
 
-	public void setCategorie(Set<Categoria> categorie) {
+	public void setCategorie(Set<CategoriaDTO> categorie) {
 		this.categorie = categorie;
 	}
 
 	public Annuncio buildAnnuncioModel() {
-		return new Annuncio(this.id, this.aperto, this.testoAnnuncio, this.prezzo, this.dataPubblicazione, this.utente);
+		return new Annuncio(this.id, this.aperto, this.testoAnnuncio, this.prezzo, this.dataPubblicazione, this.utente.buildUtenteModel());
 	}
 
 	public static AnnuncioDTO createAnnuncioDTOInstanceFromParams(Long id, Boolean aperto, String testoAnnuncio,
-			Double prezzo, Date dataPubblicazione, Utente utente, Set<Categoria> categorie) {
+			Double prezzo, Date dataPubblicazione, UtenteDTO utente, Set<CategoriaDTO> categorie) {
 
 		AnnuncioDTO result = new AnnuncioDTO(id, aperto, testoAnnuncio, prezzo, dataPubblicazione, utente);
 
 		return result;
 	}
-	
+
 	public static Annuncio createModelFromDTO(AnnuncioDTO annuncioInstance) {
-		return new Annuncio(annuncioInstance.getId(), annuncioInstance.getAperto(), annuncioInstance.getTestoAnnuncio(), annuncioInstance.getPrezzo(),
-				annuncioInstance.getDataPubblicazione(), annuncioInstance.getUtente(), annuncioInstance.getCategorie());
+		return new Annuncio(annuncioInstance.getId(), annuncioInstance.getAperto(), annuncioInstance.getTestoAnnuncio(),
+				annuncioInstance.getPrezzo(), annuncioInstance.getDataPubblicazione(), annuncioInstance.getUtente().buildUtenteModel(),
+				CategoriaDTO.createCategoriaModelListFromDTOList(annuncioInstance.getCategorie()));
 	}
-	
+
 	public static AnnuncioDTO createDTOFromModel(Annuncio annuncioInstance) {
-		return new AnnuncioDTO(annuncioInstance.getId(), annuncioInstance.getAperto(), annuncioInstance.getTestoAnnuncio(),
-				annuncioInstance.getPrezzo(), annuncioInstance.getDataPubblicazione(), annuncioInstance.getUtente(), annuncioInstance.getCategorie());
+		return new AnnuncioDTO(annuncioInstance.getId(), annuncioInstance.getAperto(),
+				annuncioInstance.getTestoAnnuncio(), annuncioInstance.getPrezzo(),
+				annuncioInstance.getDataPubblicazione(), UtenteDTO.createDTOFromModel(annuncioInstance.getUtente()),
+				CategoriaDTO.createCategoriaDTOListFromModelList(annuncioInstance.getCategorie()));
 	}
-	
+
 	public static List<Annuncio> createAnnuncioModelListFromDTOList(List<AnnuncioDTO> dtoListInput) {
 		return dtoListInput.stream().map(utenteEntity -> createModelFromDTO(utenteEntity)).collect(Collectors.toList());
 	}

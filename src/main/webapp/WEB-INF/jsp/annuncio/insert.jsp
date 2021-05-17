@@ -71,7 +71,7 @@
 						<div class="form-row">	
 							<div class="form-group col-md-6">
 								<label for="${insert_categoria_attr }">Categorie</label>
-							    <select class="form-control" id="categorie" name="categorie">
+							    <select class="form-control" id="categoria.id" name="categorie">
 							    	<option value="" selected> -- Selezionare una voce -- </option>
 							      	<c:forEach items="${insert_categoria_attr }" var="categoriaItem">
 							      		<option value="${categoriaItem.id}" >${categoriaItem.descrizione }</option>
