@@ -13,6 +13,8 @@ import javax.validation.constraints.Size;
 
 import it.prova.ebay.model.StatoUtente;
 import it.prova.ebay.model.Utente;
+import it.prova.ebay.validate.RegistrationOrInsertValid;
+import it.prova.ebay.validate.UpdateValid;
 
 public class UtenteDTO {
 
@@ -51,7 +53,7 @@ public class UtenteDTO {
 	private StatoUtente stato;
 
 	@NotEmpty(message = "{ruoli.notempty}", groups = UpdateValid.class)
-	private Set<RuoloDTO> ruoli = new HashSet<>(0);
+	private Set<RuoloDTO> ruoliDTO = new HashSet<>(0);
 
 	private Set<AcquistoDTO> acquisti = new HashSet<>(0);
 
@@ -145,12 +147,12 @@ public class UtenteDTO {
 		this.stato = stato;
 	}
 
-	public Set<RuoloDTO> getRuoli() {
-		return ruoli;
+	public Set<RuoloDTO> getRuoliDTO() {
+		return ruoliDTO;
 	}
 
-	public void setRuoli(Set<RuoloDTO> ruoli) {
-		this.ruoli = ruoli;
+	public void setRuoliDTO(Set<RuoloDTO> ruoli) {
+		this.ruoliDTO = ruoli;
 	}
 
 	public Set<AcquistoDTO> getAcquisti() {
@@ -187,7 +189,7 @@ public class UtenteDTO {
 		this.dataCreazione = dataCreazione;
 		this.codiceFiscale = codiceFiscale;
 		this.stato = stato;
-		this.ruoli = ruoli;
+		this.ruoliDTO = ruoli;
 	}
 
 	public UtenteDTO(@NotBlank String nome, @NotBlank String cognome, @NotBlank String username,
@@ -221,7 +223,7 @@ public class UtenteDTO {
 		this.dataCreazione = dataCreazione;
 		this.codiceFiscale = codiceFiscale;
 		this.stato = stato;
-		this.ruoli = ruoli;
+		this.ruoliDTO = ruoli;
 	}
 
 	public UtenteDTO(@NotBlank String nome, @NotBlank String cognome, @NotBlank String username,
@@ -239,7 +241,7 @@ public class UtenteDTO {
 		this.dataCreazione = dataCreazione;
 		this.codiceFiscale = codiceFiscale;
 		this.stato = stato;
-		this.ruoli = ruoli;
+		this.ruoliDTO = ruoli;
 	}
 
 	public UtenteDTO(Long id, @NotBlank String nome, @NotBlank String cognome, @NotBlank String username,
@@ -274,7 +276,7 @@ public class UtenteDTO {
 		this.dataCreazione = dataCreazione;
 		this.codiceFiscale = codiceFiscale;
 		this.stato = stato;
-		this.ruoli = ruoli;
+		this.ruoliDTO = ruoli;
 		this.acquisti = acquisti;
 		this.annunci = annunci;
 	}
@@ -304,7 +306,7 @@ public class UtenteDTO {
 	public UtenteDTO(Long id, @NotBlank String nome, @NotBlank String cognome, @NotBlank String username,
 			@NotNull Double credito, @NotNull Date dataNascita, @NotNull Date dataCreazione,
 			@NotBlank String codiceFiscale, @NotNull StatoUtente stato,
-			@NotEmpty(message = "{ruoli.notempty}") Set<RuoloDTO> ruoli) {
+			@NotEmpty Set<RuoloDTO> ruoli) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -315,13 +317,13 @@ public class UtenteDTO {
 		this.dataCreazione = dataCreazione;
 		this.codiceFiscale = codiceFiscale;
 		this.stato = stato;
-		this.ruoli = ruoli;
+		this.ruoliDTO = ruoli;
 
 	}
 
 	public Utente buildUtenteModel() {
 		return new Utente(this.nome, this.cognome, this.username, this.password, this.dataNascita, this.dataCreazione,
-				this.codiceFiscale, this.credito, this.stato, RuoloDTO.createRuoloModelListFromDTOList(this.ruoli));
+				this.codiceFiscale, this.credito, this.stato, RuoloDTO.createRuoloModelListFromDTOList(this.ruoliDTO));
 	}
 
 	public static UtenteDTO createUtenteDTOInstanceFromParams(String nomeInput, String cognomeInput,

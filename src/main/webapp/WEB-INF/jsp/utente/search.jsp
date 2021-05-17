@@ -28,7 +28,7 @@
 		    </div>
 		    <div class='card-body'>
 
-					<form:form method="post" action="list" >
+					<form method="post" action="list" >
 					
 						<div class="form-row">
 							<div class="form-group col-md-6">
@@ -72,10 +72,10 @@
 							    </select>	
 						</div>
 						<div class="form-group col-md-6">	
-							<label for="roles">Ruoli:</label>
+							<label for="ruoliDTO">Ruoli:</label>
 								<div class="form-check">
 								<c:forEach items="${list_ruoli_attr}" var="ruoloItem">
-								  	<input name="roles" class="form-check-input" type="checkbox" value="${ruoloItem.id}" id="defaultCheck${ruoloItem.id}">
+								  	<input name="ruoliDTO" class="form-check-input" type="checkbox" value="${ruoloItem.id}" id="defaultCheck${ruoloItem.id}">
 							  		<label class="form-check-label" for="defaultCheck${ruoloItem.id}">${ruoloItem.descrizione}</label>
 								<br/>
 								</c:forEach>
@@ -88,7 +88,7 @@
 
 						<a class="btn btn-outline-primary ml-2" href="insert">Add New</a>
 						
-					</form:form>
+					</form>
 			<!-- end card-body -->			   
 		    </div>
 		</div>	

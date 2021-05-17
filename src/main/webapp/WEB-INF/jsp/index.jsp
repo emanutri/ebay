@@ -38,7 +38,6 @@
 		  </button>
 		</div>
 	  
-	  
 	    <!-- Example row of columns -->
 	    <div class="row">
 	      <div class="col-md-6">
@@ -49,7 +48,7 @@
 	      <div class="col-md-6">
 	        <h2>Area Personale</h2>
 	        <p>Questa funzionalità è realtiva alla Gestione del tuo fantastico profilo</p>
-	        <p><a class="btn btn-primary" href="utente/index" role="button">Vai alla Funzionalità &raquo;</a></p>
+	        <p><a class="btn btn-primary" href="areapersonale/show" role="button">Vai alla Funzionalità &raquo;</a></p>
 	      </div>
 	    </div>
 	    

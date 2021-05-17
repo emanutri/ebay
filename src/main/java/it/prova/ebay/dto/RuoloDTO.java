@@ -42,16 +42,18 @@ public class RuoloDTO {
 		this.codice = codice;
 	}
 
-	public RuoloDTO(Long id, @NotBlank(message = "{descrizione.notblank}") String descrizione,
-			@NotBlank(message = "{codice.notblank}") String codice) {
+	public RuoloDTO() {
+
+	}
+
+	public RuoloDTO(Long id, String descrizione, String codice) {
 		super();
 		this.id = id;
 		this.descrizione = descrizione;
 		this.codice = codice;
 	}
 
-	public RuoloDTO(@NotBlank(message = "{descrizione.notblank}") String descrizione,
-			@NotBlank(message = "{codice.notblank}") String codice) {
+	public RuoloDTO(String descrizione, String codice) {
 		super();
 		this.descrizione = descrizione;
 		this.codice = codice;

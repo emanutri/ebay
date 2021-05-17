@@ -311,6 +311,9 @@ public class Utente {
 		return "Utente [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", username=" + username + "]";
 	}
 	
-	
+	public boolean isAttivo() {
+		return this.stato.equals(StatoUtente.ATTIVO);
+	}
+
 
 }

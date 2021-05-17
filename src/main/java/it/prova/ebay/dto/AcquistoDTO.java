@@ -115,8 +115,7 @@ public class AcquistoDTO {
 	}
 
 	public static AcquistoDTO createDTOFromModel(Acquisto acquistoInstance) {
-		return new AcquistoDTO(acquistoInstance.getDescrizione(), acquistoInstance.getPrezzo(),
-				acquistoInstance.getAnno());
+		return new AcquistoDTO(acquistoInstance.getId(),acquistoInstance.getDescrizione(), acquistoInstance.getPrezzo(), acquistoInstance.getAnno());
 	}
 
 	public static List<Acquisto> createAcquistoModelListFromDTOList(List<AcquistoDTO> dtoListInput) {

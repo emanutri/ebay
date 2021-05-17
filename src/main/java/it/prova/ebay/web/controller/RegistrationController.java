@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import it.prova.ebay.dto.RegistrationOrInsertValid;
 import it.prova.ebay.dto.UtenteDTO;
 import it.prova.ebay.service.utente.UtenteService;
+import it.prova.ebay.validate.RegistrationOrInsertValid;
 
 @Controller
 @RequestMapping("/registration")

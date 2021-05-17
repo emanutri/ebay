@@ -9,7 +9,7 @@ public interface AcquistoService {
 
 	public List<Acquisto> listAllAcquisti();
 
-	public Acquisto caricaSingoloUtente(Long id);
+	public Acquisto caricaSingoloAcquisto(Long id);
 
 	public void aggiorna(Acquisto acquistoInstance);
 

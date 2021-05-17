@@ -1,4 +1,4 @@
-package it.prova.ebay.dto;
+package it.prova.ebay.validate;
 
 public interface RegistrationOrInsertValid {
 

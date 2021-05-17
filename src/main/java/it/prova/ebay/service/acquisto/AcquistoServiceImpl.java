@@ -22,7 +22,7 @@ public class AcquistoServiceImpl implements AcquistoService {
 	}
 
 	@Transactional(readOnly = true)
-	public Acquisto caricaSingoloUtente(Long id) {
+	public Acquisto caricaSingoloAcquisto(Long id) {
 		return repository.findById(id).orElse(null);
 
 	}
