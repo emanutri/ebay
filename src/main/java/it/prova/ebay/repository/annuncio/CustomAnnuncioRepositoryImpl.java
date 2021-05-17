@@ -24,7 +24,7 @@ public class CustomAnnuncioRepositoryImpl implements CustomAnnuncioRepository {
 		Map<String, Object> parameterMap = new HashMap<>();
 
 		StringBuilder queryBuilder = new StringBuilder(
-				"select a from Annuncio a left join fetch a.utente u left join fetch a.categorie c where a.id = a.id");
+				"select a from Annuncio a left join fetch a.utente u left join fetch a.categorie c where a.id = a.id and a.aperto = true");
 
 		if (annuncioExample.getAperto() != null) {
 			whereClauses.add(" a.aperto = :aperto ");
@@ -48,7 +48,6 @@ public class CustomAnnuncioRepositoryImpl implements CustomAnnuncioRepository {
 		}
 		System.out.println(annuncioExample.getCategorie());
 		if (annuncioExample.getCategorie() != null && !annuncioExample.getCategorie().isEmpty()) {
-			System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
 			whereClauses.add(" c = :categorie ");
 			parameterMap.put("categorie", annuncioExample.getCategorie());
 		}

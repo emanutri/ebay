@@ -61,7 +61,7 @@ public class AnnuncioController {
 	public String listAnnunci(AnnuncioDTO annuncioExample, ModelMap model) {
 		System.out.println(annuncioExample.getCategorie());
 		Set<AnnuncioDTO> annunciDTO = AnnuncioDTO.createAnnuncioDTOListFromModelList(
-				annuncioService.findByExample(AnnuncioDTO.createModelFromDTO(annuncioExample)));
+				annuncioService.findByExample(AnnuncioDTO.createModelFromDTOForSearch(annuncioExample)));
 		model.addAttribute("annunci_list_attribute", annunciDTO);
 		return "annuncio/list";
 	}
@@ -102,9 +102,9 @@ public class AnnuncioController {
 		return "annuncio/show";
 	}
 
-	@GetMapping("/preparaAcquisto/{idAnnuncio}")
-	public String preparaAcquisto(@PathVariable(required = true) Long idAnnuncio, Model model) {
-		model.addAttribute("show_annuncio_attr", annuncioService.caricaSingoloAnnuncioEager(idAnnuncio));
-		return "annuncio/dettaglio";
-	}
+//	@GetMapping("/preparaAcquisto/{idAnnuncio}")
+//	public String preparaAcquisto(@PathVariable(required = true) Long idAnnuncio, Model model) {
+//		model.addAttribute("show_annuncio_attr", annuncioService.caricaSingoloAnnuncioEager(idAnnuncio));
+//		return "annuncio/dettaglio";
+//	}
 }

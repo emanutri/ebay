@@ -33,8 +33,8 @@
 		        <h5>Lista Annunci</h5> 
 		    </div>
 		    <div class='card-body'>
-		    	<a class="btn btn-primary " href="${pageContext.request.contextPath}/annuncio/insert">Add New</a>
-		    	<a href="search" class='btn btn-outline-secondary' >
+<%-- 		    	<a class="btn btn-primary " href="${pageContext.request.contextPath}/acquisto/insert">Add New</a> --%>
+		    	<a href="annuncio/search" class='btn btn-outline-secondary' >
 			            <i class='fa fa-chevron-left'></i> Torna alla Ricerca
 			    </a>
 		    
@@ -42,32 +42,20 @@
 		            <table class='table table-striped ' >
 		                <thead>
 		                    <tr>
-		                        <th>Testo Annuncio</th>
+		                        <th>Descrizione</th>
 		                        <th>Prezzo</th>
-		                        <th>Data</th>
-		                        <th>Utente</th>
-		                        <th>Categorie</th>
-		                        <th>Annuncio Aperto</th>
-		                        <th>Azioni</th>
+		                        <th>Anno</th>
 		                    </tr>
 		                </thead>
 		                <tbody>
-		                	<c:forEach items="${annunci_list_attribute }" var="annuncioItem">
+		                	<c:forEach items="${acquisti_list_attribute }" var="acquistoItem">
 								<tr>
-									<td>${annuncioItem.testoAnnuncio }</td>
-									<td>${annuncioItem.prezzo }</td>
-									<td>${annuncioItem.dataPubblicazione }</td>
-									<td>${annuncioItem.utente.nome } ${annuncioItem.utente.cognome }</td>
+									<td>${acquistoItem.descrizione }</td>
+									<td>${acquistoItem.prezzo }</td>
+									<td>${acquistoItem.anno }</td>
 									<td>
-									<c:forEach var = "categoriaItem" items = "${annuncioItem.categorie }" > 
-										${categoriaItem.descrizione }
-										<br>
-									</c:forEach>
-									</td>
-									<td>${annuncioItem.aperto?'Aperto':'Chiuso' }</td>
-									<td>
-										<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath }/annuncio/show/${annuncioItem.id }">Dettaglio</a>
-										<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath }/acquisto/preparaAcquisto/${annuncioItem.id }">Compra</a>
+<%-- 										<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath }/annuncio/show/${annuncioItem.id }">Dettaglio</a> --%>
+<%-- 										<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath }/annuncio/preparaAcquisto/${annuncioItem.id }">Compra</a> --%>
 <%-- 										<a class="btn  btn-sm btn-outline-danger ml-2 mr-2" href="${pageContext.request.contextPath }/annuncio/delete/${annuncioItem.id }">Elimina</a> --%>
 										
 									</td>

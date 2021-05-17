@@ -25,7 +25,7 @@
 		
 		<div class='card'>
 		    <div class='card-header'>
-		        Visualizza dettaglio
+		        Visualizza riepilogo
 		    </div>
 			<form:form modelAttribute="show_annuncio_attr" method="post" action="${pageContext.request.contextPath }/acquisto/compra" novalidate="novalidate">
 			    <div class='card-body'>
@@ -89,10 +89,7 @@
 			    </div>
 			    
 			    <div class='card-footer'>
-				    <a class="btn btn-outline-primary" href="${pageContext.request.contextPath }/acquisto/riepilogo/${show_annuncio_attr.id }">Buy</a>
-					
 						<input type="hidden" name="id" value="${show_annuncio_attr.id }"/>
-	<!-- 					<input type="submit" class="btn  btn-sm btn-outline-primary ml-2 mr-2" />Compra Ora -->
 							<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Compra Ora</button>
 <%-- 		        		<input type="hidden" name="utente" value="${utente.id }"/> --%>
 		        <a href="${pageContext.request.contextPath }/annuncio/" class='btn btn-outline-secondary' style='width:80px'>
