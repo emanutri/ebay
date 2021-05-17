@@ -39,7 +39,7 @@ public class Acquisto {
 
 	@NotNull(message = "{utente.notnull}")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "utente")
+	@JoinColumn(name = "utente_id")
 	private Utente utente;
 
 	public Acquisto() {
