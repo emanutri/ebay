@@ -57,15 +57,8 @@ public class UtenteController {
 
 	@RequestMapping(value = "/list", method = {RequestMethod.GET, RequestMethod.POST})
 	public String listUtenti(UtenteDTO utenteExampleDTO, ModelMap model) {
-		System.out.println(utenteExampleDTO.getId());
-		System.out.println(utenteExampleDTO.getCognome());
-		System.out.println(utenteExampleDTO.getRuoliDTO());
-//		String[] ruoliParam = request.getParameterValues("roles");
-//		utenteExampleDTO.setRuoli(convertParamsInDTO(ruoliParam));
 		List<UtenteDTO> utentiDTO = UtenteDTO
 				.createUtenteDTOListFromModelList(utenteService.findByExample(utenteExampleDTO.buildUtenteModel()));
-//		List<UtenteDTO> utentiDTO = UtenteDTO
-//				.createUtenteDTOListFromModelList(utenteService.findByExample(utenteExampleDTO.buildUtenteModel()));
 		model.addAttribute("utente_list_attribute", utentiDTO);
 		return "utente/list";
 	}
@@ -138,15 +131,5 @@ public class UtenteController {
 		model.addAttribute("list_stati_attribute", StatoUtente.values());
 		return "utente/show";
 	}
-
-//	public Set<RuoloDTO> convertParamsInDTO(String[] ruoliParams) {
-//		Set<RuoloDTO> ruoli = new HashSet<>(0);
-//		if (ruoliParams != null) {
-//			for (String ruoloItem : ruoliParams) {
-//				ruoli.add(RuoloDTO.createDTOFromModel(ruoloService.caricaSingoloElemento(Long.parseLong(ruoloItem))));
-//			}
-//		}
-//		return ruoli;
-//	}
 
 }
