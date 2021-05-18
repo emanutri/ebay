@@ -4,9 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 import it.prova.ebay.dto.RuoloDTO;
 
+@Component
 public class RuoloDTOConverterSingleElement implements Converter<String, Set<RuoloDTO>> {
 
 	@Override
