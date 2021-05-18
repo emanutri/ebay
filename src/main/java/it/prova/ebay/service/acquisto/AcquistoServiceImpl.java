@@ -48,4 +48,9 @@ public class AcquistoServiceImpl implements AcquistoService {
 	public Acquisto findByUser(Utente utente) {
 		return repository.findByUtente(utente);
 	}
+
+	@Override
+	public Acquisto caricaSingoloElementoEager(Long id) {
+		return repository.findByIdEager(id);
+	}
 }

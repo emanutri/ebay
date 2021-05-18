@@ -18,4 +18,6 @@ public interface AcquistoService {
 	public void rimuovi(Acquisto acquistoInstance);
 	
 	public Acquisto findByUser(Utente utente);
+	
+	public Acquisto caricaSingoloElementoEager(Long id);
 }

@@ -85,8 +85,6 @@
 		        <a href="${pageContext.request.contextPath }/annuncio/" class='btn btn-outline-secondary' style='width:80px'>
 		            <i class='fa fa-chevron-left'></i> Back
 		        </a>
-<%-- 				<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath }/annuncio/list/">Back</a> --%>
-
 		    </div>
 		</div>	
 	
