@@ -80,11 +80,11 @@ public class CategoriaDTO {
 		this.descrizione = descrizione;
 		this.codice = codice;
 	}
-	
+
 	public CategoriaDTO(Long id) {
 		this.id = id;
 	}
-	
+
 	public Categoria buildCategoriaModel() {
 		return new Categoria(this.id, this.descrizione, this.codice);
 	}
@@ -96,22 +96,30 @@ public class CategoriaDTO {
 	}
 
 	public static Categoria createModelFromDTO(CategoriaDTO categoriaInstance) {
-		System.out.println(categoriaInstance.getDescrizione());
-		return new Categoria(categoriaInstance.getId(), categoriaInstance.getDescrizione(), categoriaInstance.getCodice());
+//		System.out.println(categoriaInstance);
+//		System.out.println(categoriaInstance.getId());
+		
+		return new Categoria(categoriaInstance.getId(), categoriaInstance.getDescrizione(),
+				categoriaInstance.getCodice());
 	}
 
 	public static CategoriaDTO createDTOFromModel(Categoria categoriaInstance) {
-		return new CategoriaDTO(categoriaInstance.getId(),categoriaInstance.getDescrizione(), categoriaInstance.getCodice());
+		return new CategoriaDTO(categoriaInstance.getId(), categoriaInstance.getDescrizione(),
+				categoriaInstance.getCodice());
 	}
 
 	public static Set<Categoria> createCategoriaModelListFromDTOList(Set<CategoriaDTO> dtoListInput) {
-		return dtoListInput.stream().map(categoriaEntity -> createModelFromDTO(categoriaEntity)).collect(Collectors.toSet());
+		System.out.println(dtoListInput + "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+		System.out.println(dtoListInput.size() + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		return dtoListInput.stream().map(categoriaEntity -> {
+			System.out.println(categoriaEntity);
+			return createModelFromDTO(categoriaEntity);
+			}).collect(Collectors.toSet());
 	}
 
 	public static Set<CategoriaDTO> createCategoriaDTOListFromModelList(Collection<Categoria> modelListInput) {
 		return modelListInput.stream().map(categoriaEntity -> createDTOFromModel(categoriaEntity))
 				.collect(Collectors.toSet());
 	}
-
 
 }

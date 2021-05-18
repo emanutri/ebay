@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -86,8 +84,7 @@ public class AnnuncioController {
 	@PostMapping("/save")
 	public String saveAnnuncio(
 			@Validated(InsertAnnuncioValid.class) @ModelAttribute("insert_annuncio_attr") AnnuncioDTO annuncioDTO,
-			Principal principal, BindingResult result, RedirectAttributes redirectAttrs, HttpServletRequest request,
-			Model model) {
+			Model model, Principal principal, BindingResult result, RedirectAttributes redirectAttrs) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("insert_annuncio_attr", annuncioDTO);
@@ -105,11 +102,21 @@ public class AnnuncioController {
 			categorie.add(categoriaService.caricaSingoloCategoria(categoriaItem.getId()));
 		}
 		
+		
+//		Set<Categoria> categorie = CategoriaDTO.createCategoriaModelListFromDTOList(annuncioDTO.getCategorie());
+//		Annuncio annuncio = AnnuncioDTO.createModelFromDTO(annuncioDTO);
+//		
+//		annuncio.setUtente(utenteService.findByUserName(principal.getName()));
+//		annuncio.setCategorie(categorie);
+		
+//		Set<Categoria> categorie = new HashSet<>(0);
+//		Annuncio annuncio = AnnuncioDTO.createModelFromDTO(annuncioDTO);
+//		annuncio.setUtente(utenteService.findByUserName(principal.getName()));
+//		for(CategoriaDTO categoriaItem : annuncioDTO.getCategorie()) {
+//			categorie.add(categoriaService.caricaSingoloCategoria(categoriaItem.getId()));
+//		}
+//		System.out.println(categorie.toString());
 		annuncio.setCategorie(categorie);
-		System.out.println(categorie+"CCCCCCCCCCCCCCCCCCCCCCCCCCCC");
-		System.out.println(annuncioDTO.getCategorie()+"AAAAAAAAAAAAAAAAAAAAAAA");
-		System.out.println(annuncio.getCategorie()+"BBBBBBBBBBBBBBBBBBBBBBBBBBB");
-
 		annuncioService.inserisci(annuncio);
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");

@@ -79,6 +79,7 @@
 										</c:forEach>
 			                    </div>
 		                    </div>
+		                    
 		                    <div class="form-check-inline">
 							<label class ="form-check-inline" for="${insert_annuncio_attr.aperto}">Annuncio: </label>
 						 		Aperto
