@@ -2,6 +2,7 @@ package it.prova.ebay.web.controller;
 
 import java.security.Principal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -96,9 +97,14 @@ public class AnnuncioController {
 					CategoriaDTO.createCategoriaDTOListFromModelList(categoriaService.listAllCategorie()));
 			return "annuncio/insert";
 		}
-		Set<Categoria> categorie = CategoriaDTO.createCategoriaModelListFromDTOList(annuncioDTO.getCategorie());
+		Set<Categoria> categorie = new HashSet<>();//CategoriaDTO.createCategoriaModelListFromDTOList(annuncioDTO.getCategorie());
 		Annuncio annuncio = AnnuncioDTO.createModelFromDTO(annuncioDTO);
 		annuncio.setUtente(utenteService.findByUserName(principal.getName()));
+		
+		for(CategoriaDTO categoriaItem : annuncioDTO.getCategorie()) {
+			categorie.add(categoriaService.caricaSingoloCategoria(categoriaItem.getId()));
+		}
+		
 		annuncio.setCategorie(categorie);
 		System.out.println(categorie+"CCCCCCCCCCCCCCCCCCCCCCCCCCCC");
 		System.out.println(annuncioDTO.getCategorie()+"AAAAAAAAAAAAAAAAAAAAAAA");

@@ -72,8 +72,8 @@
 							<div class="form-group col-md-6">	
 									<label for="categorie">Categorie:</label>
 										<div class="form-check">
-										<c:forEach items="${list_categorie_attr}" var="categoriaItem">
-										  	<input name="categoria" class="form-check-input" type="checkbox" value="${categoriaItem.id}" id="categoria${categoriaItem.id}">
+										<c:forEach items="${insert_categoria_attr}" var="categoriaItem">
+										  	<input name="categorie" class="form-check-input" type="checkbox" value="${categoriaItem.id}" id="categoria${categoriaItem.id}">
 									  		<label class="form-check-label" for="categoria${categoriaItem.id}">${categoriaItem.descrizione}</label>
 										<br/>
 										</c:forEach>

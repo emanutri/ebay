@@ -7,13 +7,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.ebay.model.Annuncio;
+import it.prova.ebay.model.Categoria;
 import it.prova.ebay.repository.annuncio.AnnuncioRepository;
+import it.prova.ebay.service.categoria.CategoriaService;
 
 @Service
 public class AnnuncioServiceImpl implements AnnuncioService {
 
 	@Autowired
 	private AnnuncioRepository repository;
+	
+	@Autowired
+	private CategoriaService categoriaService;
 
 	@Transactional(readOnly = true)
 	public List<Annuncio> listAllAnnunci() {
@@ -39,6 +44,13 @@ public class AnnuncioServiceImpl implements AnnuncioService {
 	@Transactional
 	public void inserisci(Annuncio annuncioInstance) {
 		repository.save(annuncioInstance);
+		if(!annuncioInstance.getCategorie().isEmpty()) {
+			for (Categoria categoriaItem : annuncioInstance.getCategorie()) {
+				categoriaItem = categoriaService.caricaSingoloCategoria(categoriaItem.getId());
+				categoriaItem.getAnnunci().add(annuncioInstance);
+				categoriaService.aggiorna(categoriaItem);//al posto di service repo
+			}
+		}
 
 	}
 
