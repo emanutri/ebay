@@ -128,7 +128,6 @@ public class AnnuncioController {
 //		for(CategoriaDTO categoriaItem : annuncioDTO.getCategorie()) {
 //			categorie.add(categoriaService.caricaSingoloCategoria(categoriaItem.getId()));
 //		}
-		
 //		Set<Categoria> categorie = CategoriaDTO.createCategoriaModelListFromDTOList(annuncioDTO.getCategorie());
 //		Annuncio annuncio = AnnuncioDTO.createModelFromDTO(annuncioDTO);
 //		
