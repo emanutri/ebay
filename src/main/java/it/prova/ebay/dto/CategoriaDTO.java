@@ -96,8 +96,12 @@ public class CategoriaDTO {
 	}
 
 	public static Categoria createModelFromDTO(CategoriaDTO categoriaInstance) {
+<<<<<<< Updated upstream
 		System.out.println(categoriaInstance.getDescrizione());
 		return new Categoria(categoriaInstance.getId(), categoriaInstance.getDescrizione(), categoriaInstance.getCodice());
+=======
+		return new Categoria(categoriaInstance.getId(), categoriaInstance.descrizione, categoriaInstance.codice);
+>>>>>>> Stashed changes
 	}
 
 	public static CategoriaDTO createDTOFromModel(Categoria categoriaInstance) {

@@ -50,6 +50,7 @@
 <!-- 								<br/> -->
 <%-- 								</c:forEach> --%>
 <!-- 								</div> -->
+<<<<<<< Updated upstream
 							<label>Categorie: </label>
 							<div class="form-check">
 		                        <c:forEach items="${list_categorie_attr }" var="categoriaItem"><br>
@@ -58,6 +59,24 @@
 		                                <label class="form-check-label" for="  ${categoriaItem.id}">${categoriaItem.descrizione} </label>
 		                            </div>
 		                        </c:forEach>
+=======
+							<div class="form-check-inline">
+		                        <label>Categorie: </label>
+		
+		                        <c:forEach items="${list_categorie_attr }" var="categoriaItem"><br>
+		
+		                            <div class="form-check" style="padding-top: 5px">
+		                                <input name="categoria" class="form-check-input" type="checkbox" value="${categoriaItem.id}" id="categoria">
+		
+		                                <label class="form-check-label" for="  ${categoriaItem.id}">
+		                                        ${categoriaItem.descrizione}
+		                                </label>
+		
+		                            </div>
+		
+		                        </c:forEach>
+		
+>>>>>>> Stashed changes
 		                    </div>
 						</div>
 						
