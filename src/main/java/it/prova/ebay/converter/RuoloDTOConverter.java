@@ -22,6 +22,5 @@ public class RuoloDTOConverter implements Converter<String, Set<RuoloDTO>>{
 		
 		return ruoliDTO;
 	}
-
-	
+		
 }
