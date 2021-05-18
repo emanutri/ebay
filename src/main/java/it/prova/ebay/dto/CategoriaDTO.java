@@ -96,12 +96,8 @@ public class CategoriaDTO {
 	}
 
 	public static Categoria createModelFromDTO(CategoriaDTO categoriaInstance) {
-<<<<<<< Updated upstream
 		System.out.println(categoriaInstance.getDescrizione());
 		return new Categoria(categoriaInstance.getId(), categoriaInstance.getDescrizione(), categoriaInstance.getCodice());
-=======
-		return new Categoria(categoriaInstance.getId(), categoriaInstance.descrizione, categoriaInstance.codice);
->>>>>>> Stashed changes
 	}
 
 	public static CategoriaDTO createDTOFromModel(Categoria categoriaInstance) {
@@ -109,11 +105,11 @@ public class CategoriaDTO {
 	}
 
 	public static Set<Categoria> createCategoriaModelListFromDTOList(Set<CategoriaDTO> dtoListInput) {
-		return dtoListInput.stream().map(utenteEntity -> createModelFromDTO(utenteEntity)).collect(Collectors.toSet());
+		return dtoListInput.stream().map(categoriaEntity -> createModelFromDTO(categoriaEntity)).collect(Collectors.toSet());
 	}
 
 	public static Set<CategoriaDTO> createCategoriaDTOListFromModelList(Collection<Categoria> modelListInput) {
-		return modelListInput.stream().map(utenteEntity -> createDTOFromModel(utenteEntity))
+		return modelListInput.stream().map(categoriaEntity -> createDTOFromModel(categoriaEntity))
 				.collect(Collectors.toSet());
 	}
 
