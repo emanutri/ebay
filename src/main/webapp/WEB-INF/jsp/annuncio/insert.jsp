@@ -69,22 +69,15 @@
 						</div>
 						
 						<div class="form-row">	
-							<div class="form-check-inline">
-		                        <label>Categorie: <span class="text-danger">*</span>  <form:errors  path="categorie" cssClass="error_field" /> </label>
-		
-		                        <c:forEach items="${insert_categoria_attr }" var="categoriaItem"><br>
-		
-		                            <div class="form-check" style="padding-top: 5px">
-		                                <input name="categorie" class="form-check-input" type="checkbox" value="${categoriaItem.id}" id="categorie">
-		
-		                                <label class="form-check-label" for="  ${categoriaItem.id}">
-		                                        ${categoriaItem.descrizione}
-		                                </label>
-		
-		                            </div>
-		
-		                        </c:forEach>
-		
+							<div class="form-group col-md-6">	
+									<label for="categorie">Categorie:</label>
+										<div class="form-check">
+										<c:forEach items="${list_categorie_attr}" var="categoriaItem">
+										  	<input name="categoria" class="form-check-input" type="checkbox" value="${categoriaItem.id}" id="categoria${categoriaItem.id}">
+									  		<label class="form-check-label" for="categoria${categoriaItem.id}">${categoriaItem.descrizione}</label>
+										<br/>
+										</c:forEach>
+			                    </div>
 		                    </div>
 		                    <div class="form-check-inline">
 							<label class ="form-check-inline" for="${insert_annuncio_attr.aperto}">Annuncio: </label>
@@ -96,16 +89,6 @@
 						</div>
 						
 						<div class="form-row">
-<!-- 						   	<div class="form-group col-md-6"> -->
-<%-- 								<label for="${insert_utente_annuncio}">Utente</label> --%>
-<!-- 							    <select class="form-control" id="utente" name="utente"> -->
-<%-- 							    	<option value="${insert_annuncio_attr.utente.id}" selected> ${insert_annuncio_attr.utente.username}</option> --%>
-<%-- 							      	<c:forEach items="${insert_utente_annuncio }" var="utenteItem"> --%>
-<%-- 							      		<option value="${utenteItem.id}" ${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} >${utenteItem.nome } ${utenteItem.cognome }</option> --%>
-<%-- 								      	${insert_annuncio_attr.utente.id == utenteItem.id?'selected':''} --%>
-<%-- 							      	</c:forEach> --%>
-<!-- 							    </select> -->
-<!-- 						    </div> -->
 						    <div class="form-group col-md-6">
 									<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date' value='${insert_annuncio_attr.dataPubblicazione}' />
 <!-- 									<label>Data di Pubblicazione <span class="text-danger">*</span></label> -->
