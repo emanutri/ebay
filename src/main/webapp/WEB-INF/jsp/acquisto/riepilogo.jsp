@@ -91,18 +91,13 @@
 			    <div class='card-footer'>
 						<input type="hidden" name="id" value="${show_annuncio_attr.id }"/>
 							<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Compra Ora</button>
-<%-- 		        		<input type="hidden" name="utente" value="${utente.id }"/> --%>
 		        <a href="${pageContext.request.contextPath }/annuncio/" class='btn btn-outline-secondary' style='width:80px'>
 		            <i class='fa fa-chevron-left danger'></i> Back
 		        </a>
-<%-- 				<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath }/annuncio/list/">Back</a> --%>
 
 		    </div>
 	    </form:form>
 		</div>	
-	
-	
-	
 	<!-- end main container -->	
 	</main>
 	<jsp:include page="../footer.jsp" />
