@@ -26,10 +26,6 @@ public class CustomAnnuncioRepositoryImpl implements CustomAnnuncioRepository {
 		StringBuilder queryBuilder = new StringBuilder(
 				"select a from Annuncio a left join fetch a.utente u left join fetch a.categorie c where a.id = a.id and a.aperto = true");
 
-		if (annuncioExample.getAperto() != null) {
-			whereClauses.add(" a.aperto = :aperto ");
-			parameterMap.put("aperto", annuncioExample.getAperto());
-		}
 		if (StringUtils.isNotBlank(annuncioExample.getTestoAnnuncio())) {
 			whereClauses.add(" a.testoAnnuncio like :testoAnnuncio ");
 			parameterMap.put("testoAnnuncio", "%" + annuncioExample.getTestoAnnuncio() + "%");
@@ -46,9 +42,8 @@ public class CustomAnnuncioRepositoryImpl implements CustomAnnuncioRepository {
 			whereClauses.add(" u = :utente ");
 			parameterMap.put("utente", annuncioExample.getUtente());
 		}
-		System.out.println(annuncioExample.getCategorie());
 		if (annuncioExample.getCategorie() != null && !annuncioExample.getCategorie().isEmpty()) {
-			whereClauses.add(" c = :categorie ");
+			whereClauses.add(" c in :categorie ");
 			parameterMap.put("categorie", annuncioExample.getCategorie());
 		}
 

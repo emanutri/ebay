@@ -96,9 +96,6 @@ public class CategoriaDTO {
 	}
 
 	public static Categoria createModelFromDTO(CategoriaDTO categoriaInstance) {
-//		System.out.println(categoriaInstance);
-//		System.out.println(categoriaInstance.getId());
-		
 		return new Categoria(categoriaInstance.getId(), categoriaInstance.getDescrizione(),
 				categoriaInstance.getCodice());
 	}
@@ -109,8 +106,6 @@ public class CategoriaDTO {
 	}
 
 	public static Set<Categoria> createCategoriaModelListFromDTOList(Set<CategoriaDTO> dtoListInput) {
-		System.out.println(dtoListInput + "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-		System.out.println(dtoListInput.size() + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		return dtoListInput.stream().map(categoriaEntity -> {
 			System.out.println(categoriaEntity);
 			return createModelFromDTO(categoriaEntity);
