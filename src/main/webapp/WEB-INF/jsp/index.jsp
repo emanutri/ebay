@@ -50,22 +50,14 @@
 <!-- 								<br/> -->
 <%-- 								</c:forEach> --%>
 <!-- 								</div> -->
-							<div class="form-check-inline">
-		                        <label>Categorie: </label>
-		
+							<label>Categorie: </label>
+							<div class="form-check">
 		                        <c:forEach items="${list_categorie_attr }" var="categoriaItem"><br>
-		
-		                            <div class="form-check" style="padding-top: 5px">
+		                            <div class="form-check" style="padding-top: 3px">
 		                                <input name="categoria" class="form-check-input" type="checkbox" value="${categoriaItem.id}" id="categoria">
-		
-		                                <label class="form-check-label" for="  ${categoriaItem.id}">
-		                                        ${categoriaItem.descrizione}
-		                                </label>
-		
+		                                <label class="form-check-label" for="  ${categoriaItem.id}">${categoriaItem.descrizione} </label>
 		                            </div>
-		
 		                        </c:forEach>
-		
 		                    </div>
 						</div>
 						

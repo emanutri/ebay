@@ -96,7 +96,8 @@ public class CategoriaDTO {
 	}
 
 	public static Categoria createModelFromDTO(CategoriaDTO categoriaInstance) {
-		return new Categoria(categoriaInstance.getId(), categoriaInstance.descrizione, categoriaInstance.codice);
+		System.out.println(categoriaInstance.getDescrizione());
+		return new Categoria(categoriaInstance.getId(), categoriaInstance.getDescrizione(), categoriaInstance.getCodice());
 	}
 
 	public static CategoriaDTO createDTOFromModel(Categoria categoriaInstance) {

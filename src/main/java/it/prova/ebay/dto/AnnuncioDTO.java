@@ -130,7 +130,6 @@ public class AnnuncioDTO {
 	public static Annuncio createModelFromDTO(AnnuncioDTO annuncioInstance) {
 		return new Annuncio(annuncioInstance.getId(), annuncioInstance.getAperto(), annuncioInstance.getTestoAnnuncio(),
 				annuncioInstance.getPrezzo(), annuncioInstance.getDataPubblicazione(),
-				annuncioInstance.getUtente().buildUtenteModel(),
 				CategoriaDTO.createCategoriaModelListFromDTOList(annuncioInstance.getCategorie()));
 	}
 

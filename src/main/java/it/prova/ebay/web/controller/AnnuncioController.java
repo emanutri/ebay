@@ -23,6 +23,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import it.prova.ebay.dto.AnnuncioDTO;
 import it.prova.ebay.dto.CategoriaDTO;
 import it.prova.ebay.dto.UtenteDTO;
+import it.prova.ebay.model.Annuncio;
+import it.prova.ebay.model.Categoria;
 import it.prova.ebay.service.annuncio.AnnuncioService;
 import it.prova.ebay.service.categoria.CategoriaService;
 import it.prova.ebay.service.utente.UtenteService;
@@ -73,6 +75,7 @@ public class AnnuncioController {
 		AnnuncioDTO annuncioDTO = new AnnuncioDTO();
 		annuncioDTO.setDataPubblicazione(new Date());
 		annuncioDTO.setUtente(UtenteDTO.createDTOFromModel(utenteService.findByUserName(principal.getName())));
+
 		model.addAttribute("insert_annuncio_attr", annuncioDTO);
 		model.addAttribute("insert_categoria_attr",
 				CategoriaDTO.createCategoriaDTOListFromModelList(categoriaService.listAllCategorie()));
@@ -80,8 +83,10 @@ public class AnnuncioController {
 	}
 
 	@PostMapping("/save")
-	public String saveAnnuncio(@Validated(InsertAnnuncioValid.class) @ModelAttribute("insert_annuncio_attr") AnnuncioDTO annuncioDTO,
-			BindingResult result, RedirectAttributes redirectAttrs, HttpServletRequest request, Model model) {
+	public String saveAnnuncio(
+			@Validated(InsertAnnuncioValid.class) @ModelAttribute("insert_annuncio_attr") AnnuncioDTO annuncioDTO,
+			Principal principal, BindingResult result, RedirectAttributes redirectAttrs, HttpServletRequest request,
+			Model model) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("insert_annuncio_attr", annuncioDTO);
@@ -91,7 +96,15 @@ public class AnnuncioController {
 					CategoriaDTO.createCategoriaDTOListFromModelList(categoriaService.listAllCategorie()));
 			return "annuncio/insert";
 		}
-		annuncioService.inserisci(AnnuncioDTO.createModelFromDTO(annuncioDTO));
+		Set<Categoria> categorie = CategoriaDTO.createCategoriaModelListFromDTOList(annuncioDTO.getCategorie());
+		Annuncio annuncio = AnnuncioDTO.createModelFromDTO(annuncioDTO);
+		annuncio.setUtente(utenteService.findByUserName(principal.getName()));
+		annuncio.setCategorie(categorie);
+		System.out.println(categorie+"CCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+		System.out.println(annuncioDTO.getCategorie()+"AAAAAAAAAAAAAAAAAAAAAAA");
+		System.out.println(annuncio.getCategorie()+"BBBBBBBBBBBBBBBBBBBBBBBBBBB");
+
+		annuncioService.inserisci(annuncio);
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/annuncio";
@@ -103,9 +116,4 @@ public class AnnuncioController {
 		return "annuncio/show";
 	}
 
-//	@GetMapping("/preparaAcquisto/{idAnnuncio}")
-//	public String preparaAcquisto(@PathVariable(required = true) Long idAnnuncio, Model model) {
-//		model.addAttribute("show_annuncio_attr", annuncioService.caricaSingoloAnnuncioEager(idAnnuncio));
-//		return "annuncio/dettaglio";
-//	}
 }
