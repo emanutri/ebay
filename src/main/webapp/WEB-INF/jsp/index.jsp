@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!doctype html>
 <html lang="it">
 <head>
@@ -41,14 +42,31 @@
 							</div>
 						</div>
 						<div class="form-group col-md-3">
-							<label for="categorie">Categorie:</label>
-								<div class="form-check">
-								<c:forEach items="${list_categorie_attr}" var="categorieItem">
-								  	<input name="categorie" class="form-check-input" type="checkbox" id = "defaultCheck${categorieItem.id}" value="${categorieItem.id}" >
-							  		<label class="form-check-label" for="defaultCheck${categorieItem.id}">${categorieItem.descrizione}</label>
-								<br/>
-								</c:forEach>
-								</div>
+<!-- 							<label for="categorie">Categorie:</label> -->
+<!-- 								<div class="form-check"> -->
+<%-- 								<c:forEach items="${list_categorie_attr}" var="categorieItem"> --%>
+<%-- 								  	<input name="categorie" class="form-check-input" type="checkbox" id = "defaultCheck${categorieItem.id}" value="${categorieItem.id}" > --%>
+<%-- 							  		<label class="form-check-label" for="defaultCheck${categorieItem.id}">${categorieItem.descrizione}</label> --%>
+<!-- 								<br/> -->
+<%-- 								</c:forEach> --%>
+<!-- 								</div> -->
+							<div class="form-check-inline">
+		                        <label>Categorie: </label>
+		
+		                        <c:forEach items="${list_categorie_attr }" var="categoriaItem"><br>
+		
+		                            <div class="form-check" style="padding-top: 5px">
+		                                <input name="categoria" class="form-check-input" type="checkbox" value="${categoriaItem.id}" id="categoria">
+		
+		                                <label class="form-check-label" for="  ${categoriaItem.id}">
+		                                        ${categoriaItem.descrizione}
+		                                </label>
+		
+		                            </div>
+		
+		                        </c:forEach>
+		
+		                    </div>
 						</div>
 						
 						<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>

@@ -69,21 +69,12 @@
 						</div>
 						
 						<div class="form-row">	
-<!-- 							<div class="form-group col-md-6"> -->
-<%-- 								<label for="${insert_categoria_attr }">Categorie</label> --%>
-<!-- 							    <select class="form-control" id="categorie" name="categorie"> -->
-<!-- 							    	<option value="" selected> -- Selezionare una voce -- </option> -->
-<%-- 							      	<c:forEach items="${insert_categoria_attr }" var="categoriaItem"> --%>
-<%-- 							      		<option value="${categoriaItem.id}" >${categoriaItem.descrizione }</option> --%>
-<%-- 							      	</c:forEach> --%>
-<!-- 							    </select> -->
-<!-- 							</div> -->
 							<div class="form-check-inline">
 		                        <label>Categorie: <span class="text-danger">*</span>  <form:errors  path="categorie" cssClass="error_field" /> </label>
 		
 		                        <c:forEach items="${insert_categoria_attr }" var="categoriaItem"><br>
 		
-		                            <div class="form-check" style="padding-top: 50px">
+		                            <div class="form-check" style="padding-top: 5px">
 		                                <input name="categorie" class="form-check-input" type="checkbox" value="${categoriaItem.id}" id="categorie">
 		
 		                                <label class="form-check-label" for="  ${categoriaItem.id}">
@@ -95,9 +86,8 @@
 		                        </c:forEach>
 		
 		                    </div>
-									
+		                    <div class="form-check-inline">
 							<label class ="form-check-inline" for="${insert_annuncio_attr.aperto}">Annuncio: </label>
-						 	<div class="form-check-inline">
 						 		Aperto
 	  							<input class="form-check-input" type="radio" name="aperto" id="aperto" value="${insert_annuncio_attr.aperto}true" >
 	  							Chiuso
