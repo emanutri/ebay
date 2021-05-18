@@ -94,14 +94,13 @@ public class AnnuncioController {
 					CategoriaDTO.createCategoriaDTOListFromModelList(categoriaService.listAllCategorie()));
 			return "annuncio/insert";
 		}
-<<<<<<< Updated upstream
-		Set<Categoria> categorie = new HashSet<>();//CategoriaDTO.createCategoriaModelListFromDTOList(annuncioDTO.getCategorie());
-		Annuncio annuncio = AnnuncioDTO.createModelFromDTO(annuncioDTO);
-		annuncio.setUtente(utenteService.findByUserName(principal.getName()));
-		
-		for(CategoriaDTO categoriaItem : annuncioDTO.getCategorie()) {
-			categorie.add(categoriaService.caricaSingoloCategoria(categoriaItem.getId()));
-		}
+//		Set<Categoria> categorie = new HashSet<>();//CategoriaDTO.createCategoriaModelListFromDTOList(annuncioDTO.getCategorie());
+//		Annuncio annuncio = AnnuncioDTO.createModelFromDTO(annuncioDTO);
+//		annuncio.setUtente(utenteService.findByUserName(principal.getName()));
+//		
+//		for(CategoriaDTO categoriaItem : annuncioDTO.getCategorie()) {
+//			categorie.add(categoriaService.caricaSingoloCategoria(categoriaItem.getId()));
+//		}
 		
 		
 //		Set<Categoria> categorie = CategoriaDTO.createCategoriaModelListFromDTOList(annuncioDTO.getCategorie());
@@ -129,7 +128,6 @@ public class AnnuncioController {
 //		for(CategoriaDTO categoriaItem : annuncioDTO.getCategorie()) {
 //			categorie.add(categoriaService.caricaSingoloCategoria(categoriaItem.getId()));
 //		}
-=======
 		
 //		Set<Categoria> categorie = CategoriaDTO.createCategoriaModelListFromDTOList(annuncioDTO.getCategorie());
 //		Annuncio annuncio = AnnuncioDTO.createModelFromDTO(annuncioDTO);
@@ -143,7 +141,6 @@ public class AnnuncioController {
 		for(CategoriaDTO categoriaItem : annuncioDTO.getCategorie()) {
 			categorie.add(categoriaService.caricaSingoloCategoria(categoriaItem.getId()));
 		}
->>>>>>> Stashed changes
 		System.out.println(categorie.toString());
 		annuncio.setCategorie(categorie);
 		annuncioService.inserisci(annuncio);
