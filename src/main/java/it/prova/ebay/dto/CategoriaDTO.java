@@ -81,8 +81,12 @@ public class CategoriaDTO {
 		this.codice = codice;
 	}
 	
+	public CategoriaDTO(Long id) {
+		this.id = id;
+	}
+	
 	public Categoria buildCategoriaModel() {
-		return new Categoria(this.descrizione, this.codice);
+		return new Categoria(this.id, this.descrizione, this.codice);
 	}
 
 	public static CategoriaDTO createCategoriaDTOInstanceFromParams(String descrizione, String codice) {

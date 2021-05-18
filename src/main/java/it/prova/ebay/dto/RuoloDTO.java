@@ -59,8 +59,13 @@ public class RuoloDTO {
 		this.codice = codice;
 	}
 
+	public RuoloDTO(Long id) {
+		super();
+		this.id = id;
+	}
+
 	public static Ruolo createModelFromDTO(RuoloDTO ruoloInstance) {
-		return new Ruolo(ruoloInstance.getDescrizione(), ruoloInstance.getCodice());
+		return new Ruolo(ruoloInstance.getId(),ruoloInstance.getDescrizione(), ruoloInstance.getCodice());
 	}
 
 	public static RuoloDTO createDTOFromModel(Ruolo ruoloInstance) {
