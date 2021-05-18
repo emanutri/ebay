@@ -9,18 +9,13 @@ import org.springframework.stereotype.Component;
 import it.prova.ebay.dto.RuoloDTO;
 
 @Component
-public class RuoloDTOConverter implements Converter<String, Set<RuoloDTO>>{
+public class RuoloDTOConverterSingleElement implements Converter<String, Set<RuoloDTO>> {
 
 	@Override
 	public Set<RuoloDTO> convert(String source) {
 		Set<RuoloDTO> ruoliDTO = new HashSet<>(0);
-//		for(String ruoloIdParam : source) {
-//			ruoliDTO.add(new RuoloDTO(Long.parseLong(ruoloIdParam)));
 		ruoliDTO.add(new RuoloDTO(Long.parseLong(source)));
-
-//		}
-		
 		return ruoliDTO;
 	}
-		
+
 }

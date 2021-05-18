@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import it.prova.ebay.dto.CategoriaDTO;
 
 @Component
-public class CategoriaDTOConverter implements Converter<String[], Set<CategoriaDTO>> {
+public class CategoriaDTOArrayConverter implements Converter<String[], Set<CategoriaDTO>> {
 
 	@Override
 	public Set<CategoriaDTO> convert(String[] source) {
