@@ -34,7 +34,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
     	 http.authorizeRequests()
     	 .antMatchers("/","/home").permitAll()//da inserire la search di annunci
          .antMatchers("/assets/**").permitAll()
-         .antMatchers("/login", "/registration/**" ,"/search").permitAll()
+         .antMatchers("/login", "/registration/**" ,"/search", "/annuncio/list").permitAll()
          .antMatchers("/utente/**").hasRole("ADMIN")
          .antMatchers("/areapersonale","/**").hasAnyRole("ADMIN", "CLASSIC_USER")
          //.antMatchers("/anonymous*").anonymous()

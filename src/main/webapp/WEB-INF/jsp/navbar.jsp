@@ -18,7 +18,7 @@
           <a class="dropdown-item" href="${pageContext.request.contextPath}/home">Home</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath}/annuncio/search">Ricerca Annunci</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath}/annuncio/insert">Inserisci Annuncio</a>
-<%--           <a class="dropdown-item" href="${pageContext.request.contextPath}/film/search">Ricerca Film</a> --%>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/areapersonale/show">Area Personale</a>
 <%--           <a class="dropdown-item" href="${pageContext.request.contextPath}/film/insert">Inserisci Film</a> --%>
         </div>
       </li>

@@ -1,63 +1,68 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="it">
-  <head>
+<head>
+	<jsp:include page="header.jsp" />
+	<title>Ricerca</title>
+	
+	<!-- style per le pagine diverse dalla index -->
+    <link href="${pageContext.request.contextPath }/assets/css/global.css" rel="stylesheet">
     
-    <jsp:include page="./header.jsp" />
-    
-    <!-- Custom styles for this template -->
-    <link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet" type="text/css">
-    <style type="text/css">
-    	body {
-		  padding-top: 3.5rem;
-		}	
-    </style>
-    
-    <title>Gestione della Raccolta Film</title>
-  </head>
-  <body>
-  
-	<jsp:include page="./navbar.jsp" />
-  
-  
-	<main role="main">
-
-	  <!-- Main jumbotron for a primary marketing message or call to action -->
-	  <div class="jumbotron" >
-	    <div class="container">
-	      <h1 class="display-3">Benvenuto su ebay di emanuele e giacomo</h1>
-	      <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-	    </div>
-	  </div>
-	  
-	  <div class="container">
-	  
-	  	<div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}" role="alert">
+</head>
+<body>
+	<jsp:include page="navbar.jsp" />
+	
+	<main role="main" class="container">
+	
+		<div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}" role="alert">
 		  ${errorMessage}
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		    <span aria-hidden="true">&times;</span>
 		  </button>
 		</div>
-	  
-	    <!-- Example row of columns -->
-	    <div class="row">
-	      <div class="col-md-6">
-	        <h2>Cerca Annunci</h2>
-	        <p>Trova l'annuncio che fa per te! <br> Tra oltre 10'000 annunci sul nostro sito puoi trovare il prodotto a prezzo scontato che preferisci</p>
-	        <p><a class="btn btn-primary" href="annuncio/search" role="button">Vai alla Funzionalità &raquo;</a></p>
-	      </div>
-	      <div class="col-md-6">
-	        <h2>Area Personale</h2>
-	        <p>Questa funzionalità è realtiva alla Gestione del tuo fantastico profilo</p>
-	        <p><a class="btn btn-primary" href="areapersonale/show" role="button">Vai alla Funzionalità &raquo;</a></p>
-	      </div>
-	    </div>
-	    
-	    <hr>
-	
-	  </div> <!-- /container -->
-	
+		
+		<div class='card'>
+		    <div class='card-header'>
+		        <h5>Ricerca annunci</h5> 
+		    </div>
+		    <div class='card-body'>
+
+					<form method="post" action="annuncio/list" >
+					
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>Testo Annuncio</label>
+								<input type="text" name="testoAnnuncio" id="testoAnnuncio" class="form-control" placeholder="Inserire il Testo dell'Annuncio" >
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label>Prezzo</label>
+								<input type="number" name="prezzo" id="prezzo" class="form-control" placeholder="Inserire il prezzo" >
+							</div>
+						</div>
+						<div class="form-group col-md-3">
+							<label for="categorie">Categorie:</label>
+								<div class="form-check">
+								<c:forEach items="${list_categorie_attr}" var="categorieItem">
+								  	<input name="categorie" class="form-check-input" type="checkbox" id = "defaultCheck${categorieItem.id}" value="${categorieItem.id}" >
+							  		<label class="form-check-label" for="defaultCheck${categorieItem.id}">${categorieItem.descrizione}</label>
+								<br/>
+								</c:forEach>
+								</div>
+						</div>
+						
+						<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
+						<input class="btn btn-outline-warning" type="reset" value="Ripulisci">
+
+						<a class="btn btn-outline-primary ml-2" href="${pageContext.request.contextPath }/annuncio/insert">Add New</a>
+						
+					</form>
+			<!-- end card-body -->			   
+		    </div>
+		</div>	
+	<!-- end container -->	
 	</main>
+	<jsp:include page="footer.jsp" />
 	
-	<jsp:include page="./footer.jsp" />
-  </body>
+</body>
 </html>

@@ -70,8 +70,6 @@ public class AnnuncioController {
 
 	@GetMapping("/insert")
 	public String createAnnuncio(Model model, Principal principal) {
-//		model.addAttribute("insert_utente_annuncio",
-//				UtenteDTO.createUtenteDTOListFromModelList(utenteService.listAllUtenti()));
 		AnnuncioDTO annuncioDTO = new AnnuncioDTO();
 		annuncioDTO.setDataPubblicazione(new Date());
 		annuncioDTO.setUtente(UtenteDTO.createDTOFromModel(utenteService.findByUserName(principal.getName())));
