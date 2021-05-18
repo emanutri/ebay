@@ -55,8 +55,6 @@ public class Annuncio {
 	public Annuncio() {
 	}
 
-	// non inserisco aperto in quanto all'inserimento dell'annuncio, diventa subito
-	// aperto=true
 	public Annuncio(String testoAnnuncio, Double prezzo, Date dataPubblicazione, Set<Categoria> categorie) {
 		this.testoAnnuncio = testoAnnuncio;
 		this.prezzo = prezzo;
@@ -75,7 +73,8 @@ public class Annuncio {
 		this.categorie = categorie;
 	}
 
-	public Annuncio(Long id, Boolean aperto, String testoAnnuncio, Double prezzo, Date dataPubblicazione, Utente utente) {
+	public Annuncio(Long id, Boolean aperto, String testoAnnuncio, Double prezzo, Date dataPubblicazione,
+			Utente utente) {
 		this.id = id;
 		this.aperto = aperto;
 		this.testoAnnuncio = testoAnnuncio;
