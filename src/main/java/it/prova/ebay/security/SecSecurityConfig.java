@@ -32,9 +32,9 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	 http.authorizeRequests()
-    	 .antMatchers("/","/home").permitAll()//da inserire la search di annunci
+    	 .antMatchers("/","/home").permitAll()
          .antMatchers("/assets/**").permitAll()
-         .antMatchers("/login", "/registration/**" ,"/search", "/annuncio/list").permitAll()
+         .antMatchers("/login", "/registration/**" ,"/search", "/annuncio/list", "/annuncio/show/**", "/annuncio/").permitAll()
          .antMatchers("/utente/**").hasRole("ADMIN")
          .antMatchers("/areapersonale","/**").hasAnyRole("ADMIN", "CLASSIC_USER")
          //.antMatchers("/anonymous*").anonymous()
