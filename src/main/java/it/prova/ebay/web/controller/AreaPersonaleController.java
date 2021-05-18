@@ -46,7 +46,7 @@ public class AreaPersonaleController {
 	
 	@GetMapping("/showInfoAcquisto/{idAcquisto}")
 	public String showAcquistiInfo(@PathVariable(required = true) Long idAcquisto, Model model) {
-		model.addAttribute("show_acquisto_attr", AcquistoDTO.createDTOFromModel(acquistoService.caricaSingoloElementoEager(idAcquisto)));
+		model.addAttribute("show_acquisto_attr", AcquistoDTO.createDTOFromModel(acquistoService.caricaSingoloAcquisto(idAcquisto)));
 		return "areapersonale/showInfoAcquisto";
 	}
 	

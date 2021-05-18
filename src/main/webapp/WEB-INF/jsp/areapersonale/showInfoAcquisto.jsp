@@ -42,33 +42,6 @@
 				  <dd class="col-sm-9"><fmt:formatDate type = "date" value = "${show_acquisto_attr.anno}" /></dd>
 		    	</dl>
 		    	
-		    	<p>
-				  <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-				    Info Utente
-				  </a>
-				</p>
-				<div class="collapse" id="collapseExample">
-				  <div class="card card-body">
-				  	<dl class="row">
-					  <dt class="col-sm-3 text-right">Nome:</dt>
-					  <dd class="col-sm-9">${show_acquisto_attr.utente.nome}</dd>
-				   	</dl>
-				   	<dl class="row">
-					  <dt class="col-sm-3 text-right">Cognome:</dt>
-					  <dd class="col-sm-9">${show_acquisto_attr.utente.cognome}</dd>
-				   	</dl>
-				   	<dl class="row">
-					  <dt class="col-sm-3 text-right">Username:</dt>
-					  <dd class="col-sm-9">${show_acquisto_attr.utente.username}</dd>
-				   	</dl>
-				   	<dl class="row">
-					  <dt class="col-sm-3 text-right">Attivo dal:</dt>
-					  <dd class="col-sm-9">${show_acquisto_attr.utente.dataCreazione}</dd>
-				   	</dl>
-				  </div>
-				</div>
-				<!-- end info Utente -->
-		    	
 		    </div>
 		    
 		    <div class='card-footer'>
